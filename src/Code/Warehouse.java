@@ -49,8 +49,22 @@ public class Warehouse implements Functions{
 	//Nursultan - check availability don't forget to check SystemDate
 	@Override
 	public boolean checkAvailability(Item item) {
+		SystemDate.createTheInstance(item.getArrivalDate().toString());
+		setSlotsUpToDate();
 		
-		return true;
+		for(Slot s : slots) {
+			if(s.freeVolume >= item.getDimensions()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public void setSlotsUpToDate() {
+		for(Slot s : slots) {
+			s.updateSlot();
+		}
 	}
 	
 	

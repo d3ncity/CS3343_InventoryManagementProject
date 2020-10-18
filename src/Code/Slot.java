@@ -1,6 +1,7 @@
 package Code;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class Slot {
 
@@ -30,6 +31,18 @@ public class Slot {
 	public void printItemsInSlot() {
 		for(int i =0;i<items.size();i++) {
 			System.out.println(i+1+". "+items.get(i).toString());
+		}
+	}
+	
+	public void updateSlot() {
+		Iterator<Item> itr = items.iterator();
+		
+		while (itr.hasNext()) {
+			Item item = itr.next(); 
+			if (item.getDepartureDate().less(SystemDate.getInstance()) || item.getDepartureDate().equals(SystemDate.getInstance())) { 
+				this.freeVolume += item.getDimensions();
+				itr.remove(); 
+			} 
 		}
 	}
 	
