@@ -65,19 +65,35 @@ public class Warehouse implements Functions{
 		}
 		
 	}
+	
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
+	public void optimize(Slot[] slots, Item[] items) {
 		
+		//Please double-check the logic
+		// check from the smallest item to the largest item that is smaller than the slot size - if found true
+		// check from the smallest available slot space - if found true
+		//sort items by size (smallest to largest)
+		//sort slots by size (smallest to largest)
+		
+		boolean wasOptimized  = false;
+		for(int i=0; i<items.length; i++) {
+			for(int j=0; j<slots.length; j++) {
+				if(items[i].getDimensions()<slots[j].getVolume()) {
+					if(items[i].getDimensions()<=slots[j].getFreeVolume()) {
+						//Slot cur = items[i].getCurrentSlot();
+						//cur.removeItem(items[i]);
+						
+						slots[j].addItem(items[i]);
+						wasOptimized = true;
+					}
+				}
+			}
+		}
+		
+		if(wasOptimized) {
+			System.out.println("Optimizing was done.");
+		}
 	}
-	
-	
-	
-	
-
-	
-	
-	
 	
 }

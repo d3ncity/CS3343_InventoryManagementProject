@@ -14,7 +14,7 @@ public interface Functions {
 	 
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	 
-	 void optimize();
+	 void optimize(Slot[] slots,Item[] items);
 	 
 	 
 }
