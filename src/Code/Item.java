@@ -8,13 +8,13 @@ public class Item {
 	private Day departureDate;
 	private int ID;
 	
-	public Item(int dimensions, Day arrival, Day departure,int ID) {
+	public Item(int dimensions, Day arrival, Day departure) {
 		this.dimensions=dimensions;
 		this.arrivalDate = arrival;
 		this.departureDate = departure;
-		//Things to discuss#1: Should ID be automatically assigned?
-		//this.ID = Warehouse.getInstance().assignItemsID();
-		this.ID = ID;
+		//Harvey V1.0 - automatically ID
+		this.ID = Warehouse.getInstance().assignItemsID();
+		//this.ID = ID;
 	}
 	
 	public Day getArrivalDate() {
