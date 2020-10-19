@@ -78,21 +78,20 @@ public class Warehouse implements Functions{
 		
 		boolean wasOptimized  = false;
 		for(int i=0; i<items.length; i++) {
-			for(int j=0; j<slots.length; j++) {
-				if(items[i].getDimensions()<slots[j].getVolume()) {
-					if(items[i].getDimensions()<=(items[i].getCurrentSlot()).getFreeVolume()) {
-						Slot next = findBetterSlot();
+
+					if(items[i].getDimensions()<(items[i].getCurrentSlot()).getVolume()) {
+						Slot next = findBetterSlot(slots, items[i]);
 						if(next!=null) {
 							//rearranging item
 							Slot cur = items[i].getCurrentSlot();
 							cur.removeItem(items[i]);
 							
+							items[i].setCurrentSlot(next);
 							next.addItem(items[i]);
 							wasOptimized = true;
 						}
 					}
-				}
-			}
+
 		}
 		
 		if(wasOptimized) {
@@ -101,8 +100,23 @@ public class Warehouse implements Functions{
 	}
 	
 	//Denny -> discuss this function
-	private Slot findBetterSlot() {
-		System.out.println("A Better Slot was not found.");
-		return null;
+	//start from slot of item -- for next version (complexity improvement)
+	private Slot findBetterSlot(Slot slots[], Item item) {
+		boolean found = false;
+		Slot bestSlot = slots[0];
+		for(int j=0; j<slots.length; j++) {
+			if(item.getDimensions()<=slots[j].getFreeVolume() && bestSlot.getFreeVolume()<=slots[j].getFreeVolume()) {
+				bestSlot = slots[j];
+			}
+		}
+		
+		if(found) {
+			System.out.println("A Better Slot was not found.");
+			return bestSlot;
+		}
+		else {
+			return null;
+		}
+		
 	}
 }
