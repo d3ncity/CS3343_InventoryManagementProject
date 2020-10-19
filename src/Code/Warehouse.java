@@ -16,6 +16,17 @@ public class Warehouse implements Functions{
 		
 		return instance;
 	}
+
+//	Harvey V1.0 Things to Discuss#1. Please also refer to Item.java.
+//	private int totalNumbersOfItems = 0;
+//	
+//	public int getTotalNumbersOfItems() {
+//		return totalNumbersOfItems;
+//	}
+//	
+//	public int assignItemsID() {
+//		return totalNumbersOfItems++;
+//	}
 	
 	public void set(ArrayList<Slot> slots) {
 		this.slots = slots;
