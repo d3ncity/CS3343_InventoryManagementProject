@@ -55,16 +55,35 @@ public class Warehouse implements Functions{
 	
 	
 	//Harvey - putting in slots don't forget to check SystemDate
+	public Slot searchForSlot(Item item) {
+		for (Slot s: slots) {
+			if (s.getFreeVolume() >= item.getDimensions())
+				return s;
+		}
+		return null;
+	}
+	
 	
 	@Override
 	public void moveToSlot(Item item) {
 		if(checkAvailability(item)) {
-			//move to some slot
+			//Get an available slot
+			Slot s = this.searchForSlot(item);
 			
-			System.out.print("Item #"+item.getID()+" is in Slot#slotnumber"+ " "+ SystemDate.getInstance());
+			//Check SystemDate
+			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) > 0) {
+				s.addItem(item);
+				System.out.print("Item #"+item.getID()+" is in Slot#slotnumber"+ slots.indexOf(s) + SystemDate.getInstance());
+			}
+			else {
+				System.out.print("Error. The departure date is before or equals to system date.");
+			}
+			
+			
 		}
 		
 	}
+	
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	@Override
 	public void optimize() {
