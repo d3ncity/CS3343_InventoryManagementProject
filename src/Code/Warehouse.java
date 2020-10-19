@@ -18,15 +18,16 @@ public class Warehouse implements Functions{
 	}
 
 //	Harvey V1.0 Things to Discuss#1. Please also refer to Item.java.
-//	private int totalNumbersOfItems = 0;
-//	
-//	public int getTotalNumbersOfItems() {
-//		return totalNumbersOfItems;
-//	}
-//	
-//	public int assignItemsID() {
-//		return totalNumbersOfItems++;
-//	}
+//	This is the automatic ID assign system
+	private int totalNumbersOfItems = 0;
+	
+	public int getTotalNumbersOfItems() {
+		return totalNumbersOfItems;
+	}
+	
+	public int assignItemsID() {
+		return totalNumbersOfItems++;
+	}
 	
 	public void set(ArrayList<Slot> slots) {
 		this.slots = slots;
@@ -84,6 +85,7 @@ public class Warehouse implements Functions{
 			//Check SystemDate
 			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) > 0) {
 				s.addItem(item);
+				item.setCurrentSlot(s);
 				System.out.print("Item #"+item.getID()+" is in Slot#slotnumber"+ slots.indexOf(s) + SystemDate.getInstance());
 			}
 			else {
