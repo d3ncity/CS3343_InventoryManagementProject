@@ -24,6 +24,13 @@ public class Slot {
 		items.add(item);
 		this.freeVolume = this.volume - item.getDimensions();
 	}
+	
+	//added by Denny V1.0 - consideration required
+	public void removeItem(Item item) {
+		items.remove(item);
+		this.freeVolume = this.freeVolume + item.getDimensions();
+	}
+	
 	public ArrayList<Item> getItemsList() {
 		return items;
 	}

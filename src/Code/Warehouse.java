@@ -80,12 +80,16 @@ public class Warehouse implements Functions{
 		for(int i=0; i<items.length; i++) {
 			for(int j=0; j<slots.length; j++) {
 				if(items[i].getDimensions()<slots[j].getVolume()) {
-					if(items[i].getDimensions()<=slots[j].getFreeVolume()) {
-						//Slot cur = items[i].getCurrentSlot();
-						//cur.removeItem(items[i]);
-						
-						slots[j].addItem(items[i]);
-						wasOptimized = true;
+					if(items[i].getDimensions()<=(items[i].getCurrentSlot()).getFreeVolume()) {
+						Slot next = findBetterSlot();
+						if(next!=null) {
+							//rearranging item
+							Slot cur = items[i].getCurrentSlot();
+							cur.removeItem(items[i]);
+							
+							next.addItem(items[i]);
+							wasOptimized = true;
+						}
 					}
 				}
 			}
@@ -96,4 +100,9 @@ public class Warehouse implements Functions{
 		}
 	}
 	
+	//Denny -> discuss this function
+	private Slot findBetterSlot() {
+		System.out.println("A Better Slot was not found.");
+		return null;
+	}
 }
