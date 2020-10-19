@@ -12,6 +12,8 @@ public class Item {
 		this.dimensions=dimensions;
 		this.arrivalDate = arrival;
 		this.departureDate = departure;
+		//To be discussed: Should ID be automatically assigned?
+		//this.ID = Warehouse.getInstance().assignItemsID();
 		this.ID = ID;
 	}
 	
