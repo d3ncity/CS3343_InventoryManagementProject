@@ -12,22 +12,23 @@ public class Warehouse implements Functions{
 	private Warehouse(ArrayList<Slot> slots) {
 		this.slots = slots;
 	}
+	
 	public static Warehouse getInstance() {
 		
 		return instance;
 	}
 
-//	Harvey V1.0 Things to Discuss#1. Please also refer to Item.java.
-//	This is the automatic ID assign system
-	private int totalNumbersOfItems = 0;
+	//Harvey V1.0 - ID Assignment
 	
-	public int getTotalNumbersOfItems() {
-		return totalNumbersOfItems;
-	}
+	private int totalNoOfItems = 0;
+	private int totalNoOfSlots = 0;
 	
-	public int assignItemsID() {
-		return totalNumbersOfItems++;
-	}
+	public int getTotalNoOfItems() {return totalNoOfItems;}
+	public int assignItemID() {	return totalNoOfItems++;}
+	
+	public int getTotalNoOfSlots() {return totalNoOfItems;}
+	public int assignSlotID() {return totalNoOfItems++;}
+
 	
 	public void set(ArrayList<Slot> slots) {
 		this.slots = slots;
@@ -78,21 +79,21 @@ public class Warehouse implements Functions{
 	
 	@Override
 	public void moveToSlot(Item item) {
-		if(checkAvailability(item)) {
-			//Get an available slot
-			Slot s = this.searchForSlot(item);
-			
+		//Get an available slot
+		Slot s = this.searchForSlot(item);
+		if(s != null) {
 			//Check SystemDate
 			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) > 0) {
 				s.addItem(item);
 				item.setCurrentSlot(s);
-				System.out.print("Item #"+item.getID()+" is in Slot#slotnumber"+ slots.indexOf(s) + SystemDate.getInstance());
+				System.out.println("Item #"+item.getItemID()+" is in Slot#slotnumber"+ s.getSlotID() + SystemDate.getInstance());
 			}
 			else {
-				System.out.print("Error. The departure date is before or equals to system date.");
+				System.out.println("Error. The departure date is before or equals to system date.");
 			}
-			
-			
+		}
+		else {
+			System.out.println("Sorry. Currently there is no available slots.");
 		}
 		
 	}
