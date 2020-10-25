@@ -38,6 +38,9 @@ public class Warehouse implements Functions{
 				System.out.println();
 			}
 			else {
+				if(slots.get(i).getFreeVolume()==0){
+					System.out.println("Slot " + (i+1) + " is Full!");
+				}
 				System.out.println("Slot "+(i+1)+", volume is "+ slots.get(i).getVolume()+ ", free volume is "+ slots.get(i).getFreeVolume());
 				slots.get(i).printItemsInSlot();
 				System.out.println();
@@ -68,30 +71,26 @@ public class Warehouse implements Functions{
 	
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	@Override
-	public void optimize(Slot[] slots, Item[] items) {
+	public void optimize(ArrayList<Item> items ) {
 		
 		//Please double-check the logic
-		// check from the smallest item to the largest item that is smaller than the slot size - if found true
-		// check from the smallest available slot space - if found true
-		//sort items by size (smallest to largest)
-		//sort slots by size (smallest to largest)
+		//sort items by size (smallest to largest freeVolume)
+		//sort slots by size (smallest to largest dimensions)
 		
 		boolean wasOptimized  = false;
-		for(int i=0; i<items.length; i++) {
-
-					if(items[i].getDimensions()<(items[i].getCurrentSlot()).getVolume()) {
-						Slot next = findBetterSlot(slots, items[i]);
-						if(next!=null) {
-							//rearranging item
-							Slot cur = items[i].getCurrentSlot();
-							cur.removeItem(items[i]);
-							
-							items[i].setCurrentSlot(next);
-							next.addItem(items[i]);
-							wasOptimized = true;
-						}
-					}
-
+		for(Item i: items) {
+			for(Slot s: slots) {
+				System.out.println("Item volume= " + i.getDimensions());
+				System.out.println("Slot FREE volume= " + s.getFreeVolume());
+				if(s.freeVolume>0 && s.getFreeVolume()==i.getDimensions()) {
+					System.out.println("Item current slot= " + i.getCurrentSlot().toString() + " " + i.getCurrentSlot());
+					i.getCurrentSlot().removeItem(i);
+					i.setCurrentSlot(s);
+					s.addItem(i);
+					System.out.println("Item was swapped!");
+					wasOptimized = true;
+				}
+			}
 		}
 		
 		if(wasOptimized) {
@@ -99,24 +98,4 @@ public class Warehouse implements Functions{
 		}
 	}
 	
-	//Denny -> discuss this function
-	//start from slot of item -- for next version (complexity improvement)
-	private Slot findBetterSlot(Slot slots[], Item item) {
-		boolean found = false;
-		Slot bestSlot = slots[0];
-		for(int j=0; j<slots.length; j++) {
-			if(item.getDimensions()<=slots[j].getFreeVolume() && bestSlot.getFreeVolume()<=slots[j].getFreeVolume()) {
-				bestSlot = slots[j];
-			}
-		}
-		
-		if(found) {
-			System.out.println("A Better Slot was not found.");
-			return bestSlot;
-		}
-		else {
-			return null;
-		}
-		
-	}
 }

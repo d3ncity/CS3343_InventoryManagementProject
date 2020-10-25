@@ -1,5 +1,7 @@
 package Code;
 
+import java.util.ArrayList;
+
 public interface Functions {
 
 	//check availability -returning true/false - Nursultan if we can put items in any slot
@@ -14,7 +16,7 @@ public interface Functions {
 	 
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	 
-	 void optimize(Slot[] slots,Item[] items);
+	 void optimize(ArrayList<Item> items); 
 	 
 	 
 }

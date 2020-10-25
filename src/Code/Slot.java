@@ -22,13 +22,16 @@ public class Slot {
 	}
 	public void addItem(Item item) {
 		items.add(item);
-		this.freeVolume = this.volume - item.getDimensions();
+		this.freeVolume = this.freeVolume - item.getDimensions();
+		item.setCurrentSlot(this);
 	}
 	
 	//added by Denny V1.0 - consideration required
 	public void removeItem(Item item) {
+		//restore the volume of the slot
+		this.freeVolume+=item.getDimensions();
+		//remove item from slot's itemList
 		items.remove(item);
-		this.freeVolume = this.freeVolume + item.getDimensions();
 	}
 	
 	public ArrayList<Item> getItemsList() {
