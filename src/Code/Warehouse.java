@@ -76,7 +76,22 @@ public class Warehouse implements Functions{
 		//Please double-check the logic
 		//sort items by size (smallest to largest freeVolume)
 		//sort slots by size (smallest to largest dimensions)
-		
+		/*
+		 * 1
+		 * 22___
+		 * 333__
+		 * 
+		 * 1st - change order of items
+		 * 2nd - item of size 0 / negative size
+		 * 3rd - size of item greater than the slot
+		 * 4th - adding item not accomodatable
+		 * 5th - if no input of item size is given
+		 * 6th - whether removing an item effects the optimization of storage
+		 * 
+		 * slot 1 size 8 - 3,4
+		 * slot 2 size 7 - 5
+		 *  
+		 */
 		boolean wasOptimized  = false;
 		for(Item i: items) {
 			for(Slot s: slots) {
@@ -96,6 +111,8 @@ public class Warehouse implements Functions{
 		if(wasOptimized) {
 			System.out.println("Optimizing was done.");
 		}
+		else
+			System.out.println("Optimizing was not done.");
 	}
 	
 }
