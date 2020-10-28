@@ -38,6 +38,9 @@ public class Warehouse implements Functions{
 				System.out.println();
 			}
 			else {
+				if(slots.get(i).getFreeVolume()==0){
+					System.out.println("Slot " + (i+1) + " is Full!");
+				}
 				System.out.println("Slot "+(i+1)+", volume is "+ slots.get(i).getVolume()+ ", free volume is "+ slots.get(i).getFreeVolume());
 				slots.get(i).printItemsInSlot();
 				System.out.println();
@@ -65,19 +68,34 @@ public class Warehouse implements Functions{
 		}
 		
 	}
+	
 	 // Denny - Optimize the storage function(Arrays of slots)  - void 
 	@Override
-	public void optimize() {
-		// TODO Auto-generated method stub
+	public void optimize(ArrayList<Item> items ) {
 		
+		//Please double-check the logic
+		//sort items by size (smallest to largest freeVolume)
+		//sort slots by size (smallest to largest dimensions)
+		
+		boolean wasOptimized  = false;
+		for(Item i: items) {
+			for(Slot s: slots) {
+				System.out.println("Item volume= " + i.getDimensions());
+				System.out.println("Slot FREE volume= " + s.getFreeVolume());
+				if(s.freeVolume>0 && s.getFreeVolume()==i.getDimensions()) {
+					System.out.println("Item current slot= " + i.getCurrentSlot().toString() + " " + i.getCurrentSlot());
+					i.getCurrentSlot().removeItem(i);
+					i.setCurrentSlot(s);
+					s.addItem(i);
+					System.out.println("Item was swapped!");
+					wasOptimized = true;
+				}
+			}
+		}
+		
+		if(wasOptimized) {
+			System.out.println("Optimizing was done.");
+		}
 	}
-	
-	
-	
-	
-
-	
-	
-	
 	
 }
