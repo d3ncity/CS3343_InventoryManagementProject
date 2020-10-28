@@ -52,9 +52,16 @@ public class Main {
 		 
 		 
 //		System.out.println(SystemDate.getInstance());
-		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"), 1);
-		Item item2 = new Item(3,new Day("13-Oct-2020"),new Day("20-Nov-2020"), 2);
-		Item item3 = new Item(2,new Day("13-Oct-2020"),new Day("25-Oct-2020"), 3);
+// 		Item item1 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"), 1);
+// 		Item item2 = new Item(1,new Day("13-Oct-2020"),new Day("20-Nov-2020"), 2);
+// 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"), 3);
+		
+		//Harvey NG V1.0 - 2020-Oct-19: Deleted the human input ID;
+		Item item1 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
+		Item item2 = new Item(1,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
+		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+
+
 		
 		Slot slot1 = new Slot(1);
 		Slot slot2 = new Slot(5);
