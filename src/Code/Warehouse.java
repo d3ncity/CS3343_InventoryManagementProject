@@ -1,7 +1,7 @@
 package Code;
 
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 
 public class Warehouse implements Functions{
 
@@ -26,8 +26,8 @@ public class Warehouse implements Functions{
 	public int getTotalNoOfItems() {return totalNoOfItems;}
 	public int assignItemID() {	return totalNoOfItems++;}
 	
-	public int getTotalNoOfSlots() {return totalNoOfItems;}
-	public int assignSlotID() {return totalNoOfItems++;}
+	public int getTotalNoOfSlots() {return totalNoOfSlots;}
+	public int assignSlotID() {return totalNoOfSlots++;}
 
 	
 	public void set(ArrayList<Slot> slots) {
@@ -62,12 +62,12 @@ public class Warehouse implements Functions{
 	}
 	
 	
-	//Nursultan - check availability don't forget to check SystemDate
-	@Override
-	public boolean checkAvailability(Item item) {
-		
-		return true;
-	}
+//	//Nursultan - check availability don't forget to check SystemDate
+//	@Override
+//	public boolean checkAvailability(Item item) {
+//		
+//		return true;
+//	}
 	
 	
 	//Harvey - putting in slots don't forget to check SystemDate
@@ -89,7 +89,7 @@ public class Warehouse implements Functions{
 			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) > 0) {
 				s.addItem(item);
 				item.setCurrentSlot(s);
-				System.out.println("Item #"+item.getItemID()+" is in Slot#slotnumber"+ s.getSlotID() + SystemDate.getInstance());
+				System.out.println("Item #"+item.getItemID()+" is in Slot#slotnumber"+ item.getCurrentSlot().getSlotID() + SystemDate.getInstance());
 			}
 			else {
 				System.out.println("Error. The departure date is before or equals to system date.");

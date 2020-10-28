@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public interface Functions {
 
-	//check availability -returning true/false - Nursultan if we can put items in any slot
-	boolean checkAvailability(Item item);
+//	//check availability -returning true/false - Nursultan if we can put items in any slot
+//	boolean checkAvailability(Item item);
 	
 	
 	

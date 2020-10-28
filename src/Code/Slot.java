@@ -1,6 +1,6 @@
 package Code;
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 
 public class Slot {
 
@@ -26,9 +26,17 @@ public class Slot {
 	public int getSlotID() {
 		return this.slotID;
 	}
+	public ArrayList<Item> getItemsList() {
+		return items;
+	}
+
+	//Adding item to Slot
 	public void addItem(Item item) {
+		//add item to items ArrayList
 		items.add(item);
+		//Calculate remaining Volume
 		this.freeVolume = this.freeVolume - item.getDimensions();
+		//Set current slot to assigned slot
 		item.setCurrentSlot(this);
 	}
 	
@@ -38,11 +46,11 @@ public class Slot {
 		this.freeVolume+=item.getDimensions();
 		//remove item from slot's itemList
 		items.remove(item);
+		//Harvey V1.0 - set current slot to null
+		item.setCurrentSlot(null);
 	}
 	
-	public ArrayList<Item> getItemsList() {
-		return items;
-	}
+
 	public void printItemsInSlot() {
 		for(int i =0;i<items.size();i++) {
 			System.out.println(i+1+". "+items.get(i).toString());
