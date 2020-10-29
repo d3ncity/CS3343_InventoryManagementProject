@@ -45,6 +45,8 @@ public class Main {
 		    		
 		    		
 		}
+		
+		in.close();
 		/*
 		 * This part has been moved to CmdRequest and CmdListReservation functions
 		 * The Command pattern allows us to encapsulate functions
