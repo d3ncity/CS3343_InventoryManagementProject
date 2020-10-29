@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 public class Slot {
 
-	private int volume;
+	private int totalVolume;
 	public int freeVolume;
 	private ArrayList<Item> items;
 	private int slotID;
 	
 	public Slot(int volume) {
-		this.volume = volume;
-		freeVolume = volume;
-		items= new ArrayList<>();
+		this.totalVolume = volume;
+		this.freeVolume = volume;
+		this.items= new ArrayList<>();
 		//Harvey V1.0 - automatical ID
 		this.slotID = Warehouse.getInstance().assignSlotID();
 	}
 	
 	public int getVolume() {
-		return this.volume;
+		return this.totalVolume;
 	}
 	public int getFreeVolume() {
 		return this.freeVolume;
@@ -50,7 +50,6 @@ public class Slot {
 		item.setCurrentSlot(null);
 	}
 	
-
 	public void printItemsInSlot() {
 		for(int i =0;i<items.size();i++) {
 			System.out.println(i+1+". "+items.get(i).toString());
