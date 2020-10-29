@@ -61,15 +61,6 @@ public class Warehouse implements Functions{
 		}
 	}
 	
-	
-//	//Nursultan - check availability don't forget to check SystemDate
-//	@Override
-//	public boolean checkAvailability(Item item) {
-//		
-//		return true;
-//	}
-	
-	
 	//Harvey - putting in slots don't forget to check SystemDate
 	public Slot searchForSlot(Item item) {
 		for (Slot s: slots) {
