@@ -2,7 +2,7 @@ package Code;
 import java.util.ArrayList;
 //import java.util.Collections;
 
-public class Slot {
+public class Slot implements Comparable<Slot>{
 
 	private int volume;
 	public int freeVolume;
@@ -55,6 +55,14 @@ public class Slot {
 		for(int i =0;i<items.size();i++) {
 			System.out.println(i+1+". "+items.get(i).toString());
 		}
+	}
+	
+	//Harvey V2.0 - Comparing Item Size
+	@Override
+	public int compareTo(Slot slot) {
+		if (this.volume < slot.getVolume()) return -1;
+		else if (this.volume > slot.getVolume()) return 1;
+		return 0;
 	}
 	
 }
