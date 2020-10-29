@@ -89,9 +89,13 @@ public class Main {
 		warehouse.moveToSlot(item1);
 		warehouse.moveToSlot(item2);
 		warehouse.moveToSlot(item3);
+		System.out.println("Before Optimized:");
+		System.out.println("__________________________________________");
 		warehouse.printAllSlotsDetails();
 		//Things to discuss, when should we automatically optimized
 		warehouse.optimize();
+		System.out.println("After Optimized:");
+		System.out.println("__________________________________________");
 		warehouse.printAllSlotsDetails();
 		
 		
