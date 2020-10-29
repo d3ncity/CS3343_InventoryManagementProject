@@ -85,10 +85,14 @@ public class Main {
 		Item item1 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(1,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item4 = new Item(4,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item5 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
 		
 		warehouse.moveToSlot(item1);
 		warehouse.moveToSlot(item2);
 		warehouse.moveToSlot(item3);
+		warehouse.moveToSlot(item4);
+		warehouse.moveToSlot(item5);
 		System.out.println("Before Optimized:");
 		System.out.println("__________________________________________");
 		warehouse.printAllSlotsDetails();
