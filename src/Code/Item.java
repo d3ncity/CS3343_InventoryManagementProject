@@ -6,7 +6,7 @@ public class Item implements Comparable<Item>{
 	private int dimensions;
 	private Day arrivalDate;
 	private Day departureDate;
-	private int ID;
+	private int ID = -1;
 	private Slot currentSlot;
 	
 	public Item(int dimensions, Day arrival, Day departure) {
@@ -33,8 +33,8 @@ public class Item implements Comparable<Item>{
 	@Override
 	
 	public String toString() {
-		return "Dimensions for Item#"+this.ID+" is "+this.dimensions+"; Arrival Date - "+this.arrivalDate.toString()+
-				", Departure Date is "+ this.departureDate.toString();
+		return "Dimensions for Item #"+this.ID+" is "+this.dimensions+"; Arrival Date: "+this.arrivalDate.toString()+
+				", Departure Date: "+ this.departureDate.toString();
 	}
 	
 	//added by Denny V1.0 - consideration required
@@ -46,7 +46,6 @@ public class Item implements Comparable<Item>{
 	public Slot getCurrentSlot() {
 		return this.currentSlot;
 	}
-	
 	
 	//Harvey V2.0 - Comparing Item Size
 	@Override

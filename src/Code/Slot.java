@@ -11,8 +11,8 @@ public class Slot implements Comparable<Slot>{
 	
 	public Slot(int volume) {
 		this.volume = volume;
-		freeVolume = volume;
-		items= new ArrayList<>();
+		this.freeVolume = volume;
+		this.items= new ArrayList<>();
 		//Harvey V1.0 - automatical ID
 		this.slotID = Warehouse.getInstance().assignSlotID();
 	}
@@ -57,7 +57,11 @@ public class Slot implements Comparable<Slot>{
 		}
 	}
 	
-	//Harvey V2.0 - Comparing Item Size
+	public void clear() {
+		this.items.clear();
+	}
+	
+	//Harvey V2.0 - Comparing Slot Size
 	@Override
 	public int compareTo(Slot slot) {
 		if (this.volume < slot.getVolume()) return -1;
