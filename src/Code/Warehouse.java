@@ -122,8 +122,10 @@ public class Warehouse implements Functions{
 		Optimize opt = new Optimize();
     	for (Slot s: slots) {
             opt.findOnePerfectFit(itemsBuffer, s);
-            for (int i = 0; i < s.getVolume(); i++) {
-                opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
+            if (!opt.getFound()) {
+                for (int i = 0; i < s.getVolume(); i++) {
+                    opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
+                }
             }
             ArrayList<Item> optList = opt.getOptimizedItem();
             for (int i = 0; i < optList.size(); i++) {

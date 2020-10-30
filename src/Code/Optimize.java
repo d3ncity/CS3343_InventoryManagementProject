@@ -5,11 +5,16 @@ public class Optimize {
 
 	private Slot optimizingSlot;
 	private ArrayList<Item> optimizedItem;
-	private boolean[][] truthTable; 
+	private boolean[][] truthTable;
+	private boolean found;
 	
 	public Optimize() {
 		this.optimizingSlot = null;
 		this.optimizedItem = new ArrayList<>();
+	}
+	
+	public boolean getFound() {
+		return this.found;
 	}
 	
 	public void findOnePerfectFit(ArrayList<Item> list,Slot slot) {
@@ -18,6 +23,7 @@ public class Optimize {
 			if (i.getDimensions() == slot.getFreeVolume()) {
 				slot.addItem(i);
 				item = i;
+				found = true;
 				//System.out.println("Found one item with perfect fit!");
 			}
 		}
@@ -58,7 +64,6 @@ public class Optimize {
             }
         }
         
- 
         //Check if desire sum have any subset in the ArrayList
         if (truthTable[length-1][sum] == false) 
         {
@@ -113,6 +118,7 @@ public class Optimize {
 	}
 	
     private void rearrangeSubset(ArrayList<Item> result, ArrayList<Item> list){
+    	found = true;
     	for (int i = 0; i < result.size(); i++) {
     		this.optimizingSlot.addItem(result.get(i));
     		this.optimizedItem.add(result.get(i));
@@ -127,6 +133,7 @@ public class Optimize {
     	this.optimizedItem.clear();
     	this.optimizingSlot = null;
     	this.unlock = true;
+    	this.found = false;
     }
     
 }
