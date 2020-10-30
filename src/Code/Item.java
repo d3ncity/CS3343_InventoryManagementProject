@@ -15,6 +15,11 @@ public class Item implements Comparable<Item>{
 		this.departureDate = departure;
 		//Harvey V1.0 - automatical ID
 		this.ID = Warehouse.getInstance().assignItemID();
+		autoAssign();
+	}
+	
+	private void autoAssign() {
+		Warehouse.getInstance().moveToSlot(this);
 	}
 	
 	public Day getArrivalDate() {

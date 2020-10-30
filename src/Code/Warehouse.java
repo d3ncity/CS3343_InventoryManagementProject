@@ -19,6 +19,7 @@ public class Warehouse implements Functions{
 	
 	public void addSlots(Slot slot) {
 		slots.add(slot);
+//		Collections.sort(slots);
 	}
 	
 //	public static void createInstance(ArrayList<Slot> slots) {
