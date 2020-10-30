@@ -66,20 +66,13 @@ public class Main {
 		 * The results would be shown immediately
 		 */
 		SystemDate.createTheInstance("13-Oct-2020");
-		ArrayList<Slot> slots = new ArrayList<>();
-		Warehouse.createInstance(slots);
 		Warehouse warehouse = Warehouse.getInstance();
 		Slot slot1 = new Slot(5);
 		Slot slot2 = new Slot(5);
 		Slot slot3 = new Slot(5);
 		Slot slot4 = new Slot(5);
 		Slot slot5 = new Slot(5);
-		slots.add(slot1);
-		slots.add(slot2);
-		slots.add(slot3);
-		slots.add(slot4);
-		slots.add(slot5);
-		Collections.sort(slots);
+//		Collections.sort(slots);
 		//warehouse.printAllSlotsDetails();		
 		
 		Item item1 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));

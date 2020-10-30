@@ -15,6 +15,7 @@ public class Slot implements Comparable<Slot>{
 		this.items= new ArrayList<>();
 		//Harvey V1.0 - automatical ID
 		this.slotID = Warehouse.getInstance().assignSlotID();
+		Warehouse.getInstance().addSlots(this);
 	}
 	
 	public int getVolume() {

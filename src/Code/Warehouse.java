@@ -5,31 +5,30 @@ import java.util.Collections;
 //import java.util.Collections;
 
 public class Warehouse implements Functions{
-
 	//Singleton Pattern
-	private static Warehouse instance = null;
+	//Instance Field
+	private static Warehouse instance = new Warehouse();
 	private ArrayList<Slot> slots;
+	public static Warehouse getInstance() {return instance;}
 	
-	private Warehouse(ArrayList<Slot> slots) {
+	//Constructor
+	private Warehouse() {this.slots = new ArrayList<>();}
+	public void setSlots(ArrayList<Slot> slots) {
 		this.slots = slots;
 	}
 	
-	public void set(ArrayList<Slot> slots) {
-		this.slots = slots;
+	public void addSlots(Slot slot) {
+		slots.add(slot);
 	}
 	
-	public static Warehouse getInstance() {
-		return instance;
-	}
-	
-	public static void createInstance(ArrayList<Slot> slots) {
-		if(instance == null) {
-			instance = new Warehouse(slots);
-		}
-		else {
-			instance.set(slots);
-		}
-	}
+//	public static void createInstance(ArrayList<Slot> slots) {
+//		if(instance == null) {
+//			instance = new Warehouse(slots);
+//		}
+//		else {
+//			instance.set(slots);
+//		}
+//	}
 
 	//Harvey V1.0 - ID Assignment
 	private int totalNoOfItems = 0;
@@ -62,8 +61,9 @@ public class Warehouse implements Functions{
 	
 
 	//Function - Moving an item to slot
+	//Search for a suitable slots
 	public Slot searchForSlot(Item item) {
-		//First priority find the best fit slots
+		//First priority find the best fitted slots
 		for (Slot s: slots) {
 			if (s.getFreeVolume() == item.getDimensions())
 				return s;
