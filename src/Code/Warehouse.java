@@ -79,6 +79,9 @@ public class Warehouse implements Functions{
 	
 	@Override
 	public void moveToSlot(Item item) {
+		//For testing purposes
+		added = false;
+		
 		//Get an available slot
 		Slot s = this.searchForSlot(item);
 		if(s != null) {
@@ -87,18 +90,34 @@ public class Warehouse implements Functions{
 				s.addItem(item);
 				item.setCurrentSlot(s);
 				System.out.println("Item #"+item.getItemID()+" is in Slot#"+ item.getCurrentSlot().getSlotID()+ " " + SystemDate.getInstance());
+				
+				//For testing purposes
+				added = true;
 			}
 			else {
 				System.out.println("Error. The departure date is before or equals to system date.");
+				
+				
+				//For testing purposes
+				added = false;
 			}
 		}
 		else {
 			System.out.println("Sorry. Currently there is no available slots.");
+			
+			//For testing purposes
+			added = false;
 		}
 		if (this.totalNoOfItems % 3 == 0) {
 			//Things to discuss: point for optimization
 //			optimize();
 		}
+	}
+	
+	//For test cases purposes
+	private boolean added = true;
+	public boolean testResult() {
+		return added;
 	}
 	
 	//Optimize Algorithm
