@@ -5,19 +5,20 @@ import java.util.ArrayList;
 
 public class Warehouse implements Functions{
 
-	private static Warehouse instance = null;
-	
+	private static Warehouse instance = new Warehouse();
 	private ArrayList<Slot> slots;
+	public static Warehouse getInstance() {return instance;}
 	
-	private Warehouse(ArrayList<Slot> slots) {
+	//Constructor
+	private Warehouse() {this.slots = new ArrayList<>();}
+	public void setSlots(ArrayList<Slot> slots) {
 		this.slots = slots;
 	}
 	
-	public static Warehouse getInstance() {
-		
-		return instance;
+	public void addSlots(Slot slot) {
+		slots.add(slot);
+//		Collections.sort(slots);
 	}
-
 	//Harvey V1.0 - ID Assignment
 	
 	private int totalNoOfItems = 0;
@@ -30,18 +31,6 @@ public class Warehouse implements Functions{
 	public int assignSlotID() {return totalNoOfSlots++;}
 
 	
-	public void set(ArrayList<Slot> slots) {
-		this.slots = slots;
-		
-	}
-	public static void createInstance(ArrayList<Slot> slots ) {
-		if(instance == null) {
-			instance = new Warehouse(slots);
-		}
-		else {
-			instance.set(slots);
-		}
-	}
 		
 	public void printItemsInSlots() {
 		for(int i=0;i<slots.size();i++) {

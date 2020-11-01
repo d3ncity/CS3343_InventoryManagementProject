@@ -20,6 +20,7 @@ public class Slot {
 		this.slotID = Warehouse.getInstance().assignSlotID();
 	}
 	
+	
 	public int getVolume() {
 		return this.totalVolume;
 	}
