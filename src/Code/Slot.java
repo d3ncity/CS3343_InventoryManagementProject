@@ -1,28 +1,25 @@
 package Code;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Collections;
+//import java.util.Collections;
 
+public class Slot implements Comparable<Slot>{
 
-public class Slot {
-
-	private int totalVolume;
+	private int volume;
 	public int freeVolume;
 	private ArrayList<Item> items;
 	private int slotID;
 	
 	public Slot(int volume) {
-		this.totalVolume = volume;
+		this.volume = volume;
 		this.freeVolume = volume;
 		this.items= new ArrayList<>();
 		//Harvey V1.0 - automatical ID
 		this.slotID = Warehouse.getInstance().assignSlotID();
+		Warehouse.getInstance().addSlots(this);
 	}
 	
-	
 	public int getVolume() {
-		return this.totalVolume;
+		return this.volume;
 	}
 	public int getFreeVolume() {
 		return this.freeVolume;
@@ -54,21 +51,23 @@ public class Slot {
 		item.setCurrentSlot(null);
 	}
 	
+
 	public void printItemsInSlot() {
 		for(int i =0;i<items.size();i++) {
 			System.out.println(i+1+". "+items.get(i).toString());
 		}
 	}
 	
-	public void updateSlot() {
-		Iterator<Item> itr = items.iterator();
-		
-		while (itr.hasNext()) {
-			Item item = itr.next(); 
-			if (item.getDepartureDate().less(SystemDate.getInstance()) || item.getDepartureDate().equals(SystemDate.getInstance())) { 
-				removeItem(item);
-			} 
-		}
+	public void clear() {
+		this.items.clear();
+	}
+	
+	//Harvey V2.0 - Comparing Slot Size
+	@Override
+	public int compareTo(Slot slot) {
+		if (this.volume < slot.getVolume()) return -1;
+		else if (this.volume > slot.getVolume()) return 1;
+		return 0;
 	}
 	
 }
