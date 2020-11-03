@@ -5,33 +5,34 @@ import java.util.Collections;
 //import java.util.Collections;
 
 public class Warehouse implements Functions{
+	
 	//Singleton Pattern
 	//Instance Field
 	private static Warehouse instance = new Warehouse();
 	private ArrayList<Slot> slots;
+	
+	//Instance Getter
 	public static Warehouse getInstance() {return instance;}
 	
 	//Constructor
 	private Warehouse() {this.slots = new ArrayList<>();}
-	public void setSlots(ArrayList<Slot> slots) {
-		this.slots = slots;
-	}
 	
+	// V2: #1 Methods of Slots Start ------------------------------ >
+	public void setSlots(ArrayList<Slot> slots) {this.slots = slots;}
 	public void addSlots(Slot slot) {
 		slots.add(slot);
-//		Collections.sort(slots);
+		//Harvey V3: Collection Sort for newly added function
+		Collections.sort(slots);
 	}
 	
-//	public static void createInstance(ArrayList<Slot> slots) {
-//		if(instance == null) {
-//			instance = new Warehouse(slots);
-//		}
-//		else {
-//			instance.set(slots);
-//		}
-//	}
+	public int getTheLargestSlotSize() {
+		//Since we added Collections.sort(slots)
+		//We can get the largest slot by getting the size of last slot in slots arrayList
+		return slots.get(slots.size()-1).getVolume();
+	}
+	// V2: #1 Methods of Slots End ------------------------------ >
 
-	//Harvey V1.0 - ID Assignment
+	// V2: #2 Methods of ID Assignment Start ------------------------------ >
 	private int totalNoOfItems = 0;
 	private int totalNoOfSlots = 0;
 	
@@ -40,9 +41,10 @@ public class Warehouse implements Functions{
 	
 	public int getTotalNoOfSlots() {return totalNoOfSlots;}
 	public int assignSlotID() {return ++totalNoOfSlots;}
-
 	
-	//Functions - Display all Slots details
+	// V2: #2 Methods of ID Assignment End ------------------------------ >
+	
+	// V1: #3 Methods of Display All Slots Details Start ------------------------------ >
 	public void printAllSlotsDetails() {
 		for(Slot s: slots) {
 			System.out.println("----------------------------------");
@@ -59,17 +61,35 @@ public class Warehouse implements Functions{
 		}
 		System.out.println("----------------------------------");
 	}
+	// V1: #3 Methods of Display All Slots Details End ------------------------------ >
 	
 
-	//Function - Moving an item to slot
-	//Search for a suitable slots
+	// V2: #4 Methods of moving an item to slot when the item is created
+	
+	// V3: #4.1 Check SystemDate
+	// If Arrival Date || Departure Date < SystemDate
+	// If Departure Date > Arrival Date
+	// Throws Exception
+	public boolean checkSystemDate() {
+		
+		
+		
+		return true;
+	}
+	
+	//V3: #4.2 Check Item Size
+	
+	
+	
+	
+	// V2: #4.4 Search for a suitable slots
 	public Slot searchForSlot(Item item) {
-		//First priority find the best fitted slots
+		//1. Find the best fitted slot
 		for (Slot s: slots) {
 			if (s.getFreeVolume() == item.getDimensions())
 				return s;
 		}
-		//Second priority allocate available slots
+		//2. Allocate available slot
 		for (Slot s: slots) {
 			if (s.getFreeVolume() > item.getDimensions())
 				return s;
@@ -153,35 +173,5 @@ public class Warehouse implements Functions{
             }
             opt.reset();
     	}
-	}
-	
-//	 // Denny - Optimize the storage function(Arrays of slots)  - void 
-//	@Override
-//	public void optimize(ArrayList<Item> items ) {
-//		
-//		//Please double-check the logic
-//		//sort items by size (smallest to largest freeVolume)
-//		//sort slots by size (smallest to largest dimensions)
-//		
-//		boolean wasOptimized  = false;
-//		for(Item i: items) {
-//			for(Slot s: slots) {
-//				System.out.println("Item volume= " + i.getDimensions());
-//				System.out.println("Slot FREE volume= " + s.getFreeVolume());
-//				if(s.freeVolume>0 && s.getFreeVolume()==i.getDimensions()) {
-//					System.out.println("Item current slot= " + i.getCurrentSlot().toString() + " " + i.getCurrentSlot());
-//					i.getCurrentSlot().removeItem(i);
-//					i.setCurrentSlot(s);
-//					s.addItem(i);
-//					System.out.println("Item was swapped!");
-//					wasOptimized = true;
-//				}
-//			}
-//		}
-//		
-//		if(wasOptimized) {
-//			System.out.println("Optimizing was done.");
-//		}
-//	}
-	
+	}	
 }

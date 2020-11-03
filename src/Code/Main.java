@@ -61,18 +61,18 @@ public class Main {
 		 */
 		SystemDate.createTheInstance("13-Oct-2020");
 		Warehouse warehouse = Warehouse.getInstance();
-		Slot slot1 = new Slot(4);
-		Slot slot2 = new Slot(6);
-		Slot slot3 = new Slot(7);
-		Slot slot4 = new Slot(5);
-		Slot slot5 = new Slot(6);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
-		Item item1 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-		Item item2 = new Item(4,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
-		Item item3 = new Item(5,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
-		Item item4 = new Item(2,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
-		Item item5 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
-		Item item6 = new Item(6,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
+		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
+		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item4 = new Item(4,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item5 = new Item(2,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
+		Item item6 = new Item(2,new Day("13-Oct-2020"),new Day("25-Oct-2020"));
 	
 		System.out.println("Before Optimized:");
 		System.out.println("__________________________________________");
