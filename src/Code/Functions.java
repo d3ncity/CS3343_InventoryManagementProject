@@ -1,7 +1,5 @@
 package Code;
 
-import java.util.ArrayList;
-
 public interface Functions {
 	
 //	//Temporarily Disabled Harvey V2.0

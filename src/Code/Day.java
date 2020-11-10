@@ -79,8 +79,7 @@ public class Day implements Cloneable,Comparable<Day>{
 	@Override
 	public int compareTo(Day another)
 	{
-	int self =this.getAsInt();
-	
+	int self=this.getAsInt();
 	int other=another.getAsInt();
 	if(self==other)return 0;
 	else if(self>other) return 1;
