@@ -20,7 +20,7 @@ public class CmdAddItem extends RecordedCommand {
 			
 			//Check if the Input is valid
 			if (Warehouse.getInstance().getSlotList().size() == 0) {
-				throw new ExZeroSlot();
+				throw new ExNoSlotInWarehouse();
 			}
 			if ((new Day(sDepartureDate).compareTo(sArrivalDate) == -1 || new Day(sDepartureDate).compareTo(sArrivalDate) == 0)) {
 				throw new ExInvalidDate();
@@ -30,7 +30,6 @@ public class CmdAddItem extends RecordedCommand {
 						"Invalid Dimension Input!\nThe size should be >0 and <="+
 				Warehouse.getInstance().getTheLargestSlotSize()+" (The largest slot size).");
 			}
-
 			
 			item = new Item(dimension,sArrivalDate,new Day(sDepartureDate));
 			slot = item.getCurrentSlot();
@@ -43,7 +42,7 @@ public class CmdAddItem extends RecordedCommand {
 			System.out.println(e.getMessage());
 		} catch (ExInvalidDate e) {
 			System.out.println(e.getMessage());
-		} catch (ExZeroSlot e) {
+		} catch (ExNoSlotInWarehouse e) {
 			System.out.println(e.getMessage());
 		}
 	}
