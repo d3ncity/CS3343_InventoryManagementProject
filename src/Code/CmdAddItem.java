@@ -35,7 +35,6 @@ public class CmdAddItem extends RecordedCommand {
 			slot = item.getCurrentSlot();
 			addUndoCommand(this);
 			clearRedoList();
-			
 		} catch (ExInsufficientArguments e) {
 			System.out.println(e.getMessage());
 		} catch (ExInvalidItemDimension e) {

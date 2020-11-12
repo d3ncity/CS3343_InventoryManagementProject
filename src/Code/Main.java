@@ -17,7 +17,7 @@ public class Main {
 		try {
 			inFile = new Scanner(new File(filepathname));
 //			inFile = new Scanner(new File("Testing.txt"));
-			System.out.println("Program Started.");
+//			System.out.println("Program Started.");
 			//The first command in the file must be to set the system date 
 			//(eg. "startNewDay 03-Jan-2018"); and it cannot be undone
 			String cmdLine1 = inFile.nextLine();
@@ -82,7 +82,7 @@ public class Main {
 			if (inFile != null)
 				inFile.close();
 			in.close();	
-			System.out.println("Program Ended.");
+//			System.out.println("Program Ended.");
 		}
 	}
 }

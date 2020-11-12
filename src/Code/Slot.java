@@ -1,6 +1,5 @@
 package Code;
 import java.util.ArrayList;
-//import java.util.Collections;
 
 public class Slot implements Comparable<Slot>{
 
@@ -35,16 +34,14 @@ public class Slot implements Comparable<Slot>{
 		items.add(item);
 		this.freeVolume = this.freeVolume - item.getDimensions();
 		item.setCurrentSlot(this);
-		System.out.println("Item with ID #" + item.getItemID() + " is added.");
-		System.out.println("Item #"+item.getItemID()+" is in Slot#"+ item.getCurrentSlot().getSlotID()+ " " + SystemDate.getInstance());
+		System.out.println("Item #"+item.getItemID()+" with size("+item.getDimensions()+") is added in Slot ID #"+ 
+		item.getCurrentSlot().getSlotID()+ " ; Delivery Date: " + item.getDepartureDate());
 	}
 	
 	public void removeItem(Item item) {
 		this.freeVolume+=item.getDimensions();
 		items.remove(item);
-		item.setCurrentSlot(null);
-		System.out.println("Item with ID #" + item.getItemID() + " is removed.");
-		
+		item.setCurrentSlot(null);		
 	}
 	
 	public void printItemsInSlot() {

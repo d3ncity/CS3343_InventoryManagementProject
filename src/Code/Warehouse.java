@@ -22,6 +22,19 @@ public class Warehouse implements Functions{
 	public ArrayList<Slot> getSlotList() {return slots;}
 	
 	/*
+	 * Methods for Warehouse
+	 */
+	public boolean warehouseHalfFull() {
+		int totalVolume = 0;
+		int totalFreeVolume = 0;
+		for (Slot s: slots) {
+			totalVolume += s.getVolume();
+			totalFreeVolume += s.getFreeVolume();
+		}
+		return totalFreeVolume <= (totalVolume/2);
+	}
+	
+	/*
 	 * Methods for ID
 	 * 1. getTotalNoOfItems
 	 * 2. assignItemID
@@ -104,22 +117,6 @@ public class Warehouse implements Functions{
 	 * 3. + moveToSlot
 	 */
 	
-//	public void removeExpiredItem(String sDay) {
-//		Day day = new Day(sDay);
-//		ArrayList<Item> itemList = new ArrayList<>();
-//		for (Slot s: slots) {
-//			for (Item i : s.getItemsList()) {
-//				if (i.getDepartureDate().compareTo(day) <= 0) {
-//					itemList.add(i);
-//				}
-//			}
-//			for (Item i: itemList) {
-//				s.removeItem(i);
-//			}
-//			itemList.clear();
-//		}
-//	}
-	
 	public Item findItemByID(int ID) {
 		for (Slot s: slots) {
 			for(Item i : s.getItemsList()) {
@@ -130,6 +127,8 @@ public class Warehouse implements Functions{
 		return null;
 	}
 	
+	//1. Search for perfect fitted slot
+	//2. Search any availble slots
 	private Slot searchSlotForItem(Item item) {
 		for (Slot s: slots) {
 			if (s.getFreeVolume() == item.getDimensions())
@@ -142,6 +141,7 @@ public class Warehouse implements Functions{
 		return null;
 	}
 	
+	ArrayList<Item> queueList = new ArrayList<>();
 	@Override
 	public void moveToSlot(Item item) {
 		//For testing purposes
@@ -150,21 +150,30 @@ public class Warehouse implements Functions{
 		//Get an available slot
 		Slot s = this.searchSlotForItem(item);
 		if(s != null) {
-			//Check SystemDate
 			s.addItem(item);
 			item.setCurrentSlot(s);	
+            if (s.getFreeVolume() == 0) 
+            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
+            
 			//For testing purposes
 			added = true;
 		}
 		else {
-			System.out.println("Sorry. Currently there is no available slots.");
+			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
+			queueList.add(item);
 			//For testing purposes
 			added = false;
 		}
-		if (this.totalNoOfItems % AUTONUM == 0) {
-			//Things to discuss: point for optimization
+		
+		if(warehouseHalfFull()) {
 			optimize();
 		}
+		
+	}
+	
+	//For Denny's Function
+	public void moveQueueItemToSlot() {
+
 	}
 	
 	//For test cases purposes
@@ -195,11 +204,15 @@ public class Warehouse implements Functions{
 		Optimize opt = new Optimize();
     	for (Slot s: slots) {
             opt.findOnePerfectFit(itemsBuffer, s);
+            if (s.getFreeVolume() == 0) 
+            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
+            
             if (!opt.getFound()) {
                 for (int i = 0; i < s.getVolume(); i++) {
                     opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
                 }
             }
+            
             ArrayList<Item> optList = opt.getOptimizedItem();
             for (int i = 0; i < optList.size(); i++) {
             	itemsBuffer.remove(optList.get(i));
@@ -207,4 +220,5 @@ public class Warehouse implements Functions{
             opt.reset();
     	}
 	}	
+	
 }
