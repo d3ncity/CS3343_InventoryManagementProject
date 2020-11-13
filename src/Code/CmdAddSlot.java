@@ -10,9 +10,12 @@ public class CmdAddSlot extends RecordedCommand {
 	public void execute(String[] cmdParts) {
 		volume = Integer.parseInt(cmdParts[1]);
 		try {
+			
+			//If the command arguments are less than 3
 			if (cmdParts.length < 2) {
 				throw new ExInsufficientArguments();
 			}
+			//Check if the input is valid
 			if (volume < 1 || volume > 100) {
 				throw new ExOutOfRange();
 			}
@@ -20,6 +23,7 @@ public class CmdAddSlot extends RecordedCommand {
 			slot = new Slot (volume);
 			addUndoCommand(this);
 			clearRedoList();
+			
 		} catch (ExInsufficientArguments e) {
 			System.out.println(e.getMessage());
 		} catch (ExOutOfRange e) {
