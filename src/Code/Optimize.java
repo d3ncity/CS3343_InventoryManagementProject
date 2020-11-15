@@ -24,7 +24,6 @@ public class Optimize {
 				slot.addItem(i);
 				item = i;
 				found = true;
-				//System.out.println("Found one item with perfect fit!");
 			}
 		}
 		list.remove(item);
@@ -67,7 +66,6 @@ public class Optimize {
         //Check if desire sum have any subset in the ArrayList
         if (truthTable[length-1][sum] == false) 
         {
-        	//System.out.println("No subsets.");
             return false; 
         }
 		return true; 
@@ -119,6 +117,7 @@ public class Optimize {
 	
     private void rearrangeSubset(ArrayList<Item> result, ArrayList<Item> list){
     	found = true;
+    	System.out.println("Optimized!");
     	for (int i = 0; i < result.size(); i++) {
     		this.optimizingSlot.addItem(result.get(i));
     		this.optimizedItem.add(result.get(i));

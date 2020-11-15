@@ -4,143 +4,191 @@ import java.util.ArrayList;
 import java.util.Collections;
 //import java.util.Collections;
 
-public class Warehouse implements Functions {
-	// Singleton Pattern
-	// Instance Field
-	private static Warehouse instance = new Warehouse();
+public class Warehouse implements Functions{
+	
+	//Instance Field
 	private ArrayList<Slot> slots;
-
-	public static Warehouse getInstance() {
-		return instance;
-	}
-
-	// Constructor
-	private Warehouse() {
-		this.slots = new ArrayList<>();
-	}
-
-	public void setSlots(ArrayList<Slot> slots) {
-		this.slots = slots;
-	}
-
-	public void addSlots(Slot slot) {
-		slots.add(slot);
-//		Collections.sort(slots);
-	}
-
-//	public static void createInstance(ArrayList<Slot> slots) {
-//		if(instance == null) {
-//			instance = new Warehouse(slots);
-//		}
-//		else {
-//			instance.set(slots);
-//		}
-//	}
-
-	// Harvey V1.0 - ID Assignment
 	private int totalNoOfItems = 0;
 	private int totalNoOfSlots = 0;
-
-	public int getTotalNoOfItems() {
-		return totalNoOfItems;
-	}
-
-	public int assignItemID() {
-		return ++totalNoOfItems;
-	}
-
-	public int getTotalNoOfSlots() {
-		return totalNoOfSlots;
-	}
-
-	public int assignSlotID() {
-		return ++totalNoOfSlots;
-	}
-
-	// Functions - Display all Slots details
-	public void printAllSlotsDetails() {
-		for (Slot s : slots) {
-			System.out.println("----------------------------------");
-			if (s.getFreeVolume() == s.getVolume()) {
-				System.out.println("Slot #" + s.getSlotID() + " is empty, volume is " + s.getVolume());
-			} else {
-				if (s.getFreeVolume() == 0) {
-					System.out.println("Slot #" + s.getSlotID() + " is Full!");
-				}
-				System.out.println("Slot #" + s.getSlotID() + ", volume is " + s.getVolume() + ", free volume is "
-						+ s.getFreeVolume());
-				s.printItemsInSlot();
-			}
+	private final int AUTONUM = 3;
+	
+	//Singleton Pattern
+	private static Warehouse instance = new Warehouse();
+	private Warehouse() {this.slots = new ArrayList<>();}
+	public static Warehouse getInstance() {return instance;}
+	
+	//Getters
+	public int getAutoNum() {return AUTONUM;}
+	public ArrayList<Slot> getSlotList() {return slots;}
+	
+	/*
+	 * Methods for Warehouse
+	 */
+	public boolean warehouseHalfFull() {
+		int totalVolume = 0;
+		int totalFreeVolume = 0;
+		for (Slot s: slots) {
+			totalVolume += s.getVolume();
+			totalFreeVolume += s.getFreeVolume();
 		}
-		System.out.println("----------------------------------");
+		return totalFreeVolume <= (totalVolume/2);
 	}
-
-	// Function - Moving an item to slot
-	// Search for a suitable slots
-	public Slot searchForSlot(Item item) {
-		// First priority find the best fitted slots
-		for (Slot s : slots) {
-			if (s.getFreeVolume() == item.getDimensions())
-				return s;
-		}
-		// Second priority allocate available slots
-		for (Slot s : slots) {
-			if (s.getFreeVolume() > item.getDimensions())
+	
+	/*
+	 * Methods for ID
+	 * 1. getTotalNoOfItems
+	 * 2. assignItemID
+	 * 3. getTotalNoOfSlots
+	 * 4. assignSlotID
+	 */
+	public int getTotalNoOfItems() {return totalNoOfItems;}
+	public int assignItemID() {return ++totalNoOfItems;}
+	
+	public int getTotalNoOfSlots() {return totalNoOfSlots;}
+	public int assignSlotID() {return ++totalNoOfSlots;}
+	
+	/*
+	 * Methods of Slots
+	 * 1. +addSlots
+	 * 2. +removeSlots
+	 * 3. +getTheLargestSlotSize
+	 * 4. +findSlotByID
+	 */
+//	public void setSlots(ArrayList<Slot> slots) {this.slots = slots;}
+	public void addSlots(Slot slot) {
+		slots.add(slot);
+		Collections.sort(slots);
+		System.out.println("Slot #" + slot.getSlotID() + " is created and added.");
+	}
+	public void removeSlots(Slot slot) {
+		slots.remove(slot);
+		System.out.println("Slot #" + slot.getSlotID() + " is removed.");
+	}
+	public int getTheLargestSlotSize() {
+		return slots.get(slots.size()-1).getVolume();
+	}
+	public Slot findSlotByID(int ID) {
+		for (Slot s: slots) {
+			if (s.getSlotID() == ID)
 				return s;
 		}
 		return null;
 	}
 
-	@Override
-	public void moveToSlot(Item item) {
-		// For testing purposes
-		added = false;
-
-		// Get an available slot
-		Slot s = this.searchForSlot(item);
-		if (s != null) {
-			// Check SystemDate
-			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) > 0) {
-				s.addItem(item);
-				item.setCurrentSlot(s);
-				System.out.println("Item #" + item.getItemID() + " is in Slot#" + item.getCurrentSlot().getSlotID()
-						+ " " + SystemDate.getInstance());
-
-				// For testing purposes
-				added = true;
-			} else {
-				System.out.println("Error. The departure date is before or equals to system date.");
-
-				// For testing purposes
-				added = false;
+	/*
+	 * Methods for printing
+	 * 1. +printAllSlotsDetails
+	 * 2. +printAllSlotsArray
+	 */
+	public void printAllSlotsDetails() {
+		for(Slot s: slots) {
+			System.out.println("----------------------------------");
+			if(s.getFreeVolume()==s.getVolume()){
+				System.out.println("Slot #"+ s.getSlotID() +" is empty, volume is "+ s.getVolume());
 			}
-		} else {
-			System.out.println("Sorry. Currently there is no available slots.");
-
-			// For testing purposes
-			added = false;
+			else {
+				if(s.getFreeVolume()==0){
+					System.out.println("Slot #" + s.getSlotID() + " is Full!");
+				}
+				System.out.println("Slot #"+ s.getSlotID() +", volume is "+ s.getVolume()+ ", free volume is "+ s.getFreeVolume());
+				s.printItemsInSlot();
+			}
 		}
-		if (this.totalNoOfItems % 3 == 0) {
-			// Things to discuss: point for optimization
-//			optimize();
+		System.out.println("----------------------------------");
+	}
+	
+	public void printAllSlotsArray() {
+		for(Slot s: slots) {
+			System.out.print("Slot #" + s.getSlotID() + " with Volume: "+ s.getVolume() + ", Remaining Volume: "+ s.getFreeVolume()+" : [");
+			for (int i = 0; i < s.getItemsList().size(); i++) {
+				System.out.print(s.getItemsList().get(i).getDimensions());
+				if (i != s.getItemsList().size() - 1) {
+					System.out.print(", ");
+				}
+			}
+			System.out.println("]");
 		}
 	}
 
-	// For test cases purposes
-	private boolean added = true;
+	/*
+	 * Methods for item
+	 * 1. +findItemByID
+	 * 2. -searchSlotForItem
+	 * 3. + moveToSlot
+	 */
+	
+	public Item findItemByID(int ID) {
+		for (Slot s: slots) {
+			for(Item i : s.getItemsList()) {
+				if (i.getItemID() == ID)
+					return i;
+			}
+		}
+		return null;
+	}
+	
+	//1. Search for perfect fitted slot
+	//2. Search any availble slots
+	private Slot searchSlotForItem(Item item) {
+		for (Slot s: slots) {
+			if (s.getFreeVolume() == item.getDimensions())
+				return s;
+		}
+		for (Slot s: slots) {
+			if (s.getFreeVolume() > item.getDimensions())
+				return s;
+		}
+		return null;
+	}
+	
+	ArrayList<Item> queueList = new ArrayList<>();
+	@Override
+	public void moveToSlot(Item item) {
+		//For testing purposes
+		added = false;
+		
+		//Get an available slot
+		Slot s = this.searchSlotForItem(item);
+		if(s != null) {
+			s.addItem(item);
+			item.setCurrentSlot(s);	
+            //if (s.getFreeVolume() == 0) 
+            	//System.out.println("Slot #"+ s.getSlotID() +" is Full!");
+            
+			//For testing purposes
+			added = true;
+		}
+		else {
+			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
+			queueList.add(item);
+			//For testing purposes
+			added = false;
+		}
+		
+		/*if(warehouseHalfFull()) {
+			optimize();
+		}*/
+		
+	}
+	
+	//For Denny's Function
+	public void moveQueueItemToSlot() {
 
+	}
+	
+	//For test cases purposes
+	private boolean added = true;
 	public boolean testResult() {
 		return added;
 	}
-
-	// Optimize Algorithm
-	private ArrayList<Item> itemsBuffer = new ArrayList<>();
-
+	
+	//Optimize Algorithm
+	private ArrayList<Item> itemsBuffer  = new ArrayList<>();	
 	public void allocateAllItemToBuffer() {
 		ArrayList<Item> temp = new ArrayList<>();
-		for (Slot s : slots) {
+		for(Slot s: slots) {
 			for (Item i : s.getItemsList()) {
-				temp.add(i);
+				temp.add(i);				
 				itemsBuffer.add(i);
 			}
 			for (int i = 0; i < temp.size(); i++) {
@@ -149,53 +197,28 @@ public class Warehouse implements Functions {
 			temp.clear();
 		}
 	}
-
+	
 	public void optimize() {
 		allocateAllItemToBuffer();
 		Collections.sort(itemsBuffer);
 		Optimize opt = new Optimize();
-		for (Slot s : slots) {
-			opt.findOnePerfectFit(itemsBuffer, s);
-			if (!opt.getFound()) {
-				for (int i = 0; i < s.getVolume(); i++) {
-					opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume() - i, s);
-				}
-			}
-			ArrayList<Item> optList = opt.getOptimizedItem();
-			for (int i = 0; i < optList.size(); i++) {
-				itemsBuffer.remove(optList.get(i));
-			}
-			opt.reset();
-		}
-	}
-
-//	 // Denny - Optimize the storage function(Arrays of slots)  - void 
-//	@Override
-//	public void optimize(ArrayList<Item> items ) {
-//		
-//		//Please double-check the logic
-//		//sort items by size (smallest to largest freeVolume)
-//		//sort slots by size (smallest to largest dimensions)
-//		
-//		boolean wasOptimized  = false;
-//		for(Item i: items) {
-//			for(Slot s: slots) {
-//				System.out.println("Item volume= " + i.getDimensions());
-//				System.out.println("Slot FREE volume= " + s.getFreeVolume());
-//				if(s.freeVolume>0 && s.getFreeVolume()==i.getDimensions()) {
-//					System.out.println("Item current slot= " + i.getCurrentSlot().toString() + " " + i.getCurrentSlot());
-//					i.getCurrentSlot().removeItem(i);
-//					i.setCurrentSlot(s);
-//					s.addItem(i);
-//					System.out.println("Item was swapped!");
-//					wasOptimized = true;
-//				}
-//			}
-//		}
-//		
-//		if(wasOptimized) {
-//			System.out.println("Optimizing was done.");
-//		}
-//	}
-
+    	for (Slot s: slots) {
+            opt.findOnePerfectFit(itemsBuffer, s);
+            if (s.getFreeVolume() == 0) 
+            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
+            
+            if (!opt.getFound()) {
+                for (int i = 0; i < s.getVolume(); i++) {
+                    opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
+                }
+            }
+            
+            ArrayList<Item> optList = opt.getOptimizedItem();
+            for (int i = 0; i < optList.size(); i++) {
+            	itemsBuffer.remove(optList.get(i));
+            }
+            opt.reset();
+    	}
+	}	
+	
 }

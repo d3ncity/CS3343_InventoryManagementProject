@@ -1,9 +1,6 @@
 package Code;
 
-import java.util.ArrayList;
-
-	public interface Functions {
-
+public interface Functions {
 	
 //	//Temporarily Disabled Harvey V2.0
 //	
@@ -15,5 +12,4 @@ import java.util.ArrayList;
 //	 void optimize(ArrayList<Item> items); 
 	 
 	 
-	}
-	
+}

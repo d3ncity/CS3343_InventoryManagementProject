@@ -18,7 +18,7 @@ import Code.Slot;
 import Code.SystemDate;
 import Code.Warehouse;
 
-class MoveToSlotTest {
+class MoveToSlotTestV2 {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -37,7 +37,7 @@ class MoveToSlotTest {
 	void tearDown() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	void testMoveToSlot_01() {
 		Warehouse wh =  Warehouse.getInstance();
 		ArrayList<Slot> slots = new ArrayList<>();
@@ -267,5 +267,5 @@ class MoveToSlotTest {
 		boolean result = wh.testResult();
 		String msg = "Checking when arrival and departure dates are not valid";
 		assertEquals(false, result, msg);
-	}
+	}*/
 }
