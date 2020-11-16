@@ -23,6 +23,7 @@ public class Warehouse implements Functions{
 	
 	/*
 	 * Methods for Warehouse
+	 * 1. WarehouseHalfFull(){
 	 */
 	public boolean warehouseHalfFull() {
 		int totalVolume = 0;
