@@ -2,7 +2,10 @@ package Code;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 //import java.util.Collections;
+import java.util.Queue;
 
 public class Warehouse implements Functions{
 	
@@ -162,6 +165,7 @@ public class Warehouse implements Functions{
 		else {
 			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
 			queueList.add(item);
+			Collections.sort(queueList);
 			//For testing purposes
 			added = false;
 		}
@@ -173,8 +177,17 @@ public class Warehouse implements Functions{
 	}
 	
 	//For Denny's Function
-	public void moveQueueItemToSlot() {
-
+	public void moveQueueItemToSlot() throws ExEmptyQueue{
+		
+		//empty queue
+		if(queueList.size()==0) {
+			throw new ExEmptyQueue();
+		}
+		
+		//dequeue and put into slot
+		Item oldQueueItem = queueList.get(0);
+		moveToSlot(oldQueueItem);
+		queueList.remove(0);
 	}
 	
 	//For test cases purposes
