@@ -165,7 +165,7 @@ public class Warehouse implements Functions{
 		else {
 			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
 			queueList.add(item);
-			Collections.sort(queueList);
+			Collections.sort(queueList, new SortQueue());
 			//For testing purposes
 			added = false;
 		}
@@ -183,9 +183,21 @@ public class Warehouse implements Functions{
 			throw new ExEmptyQueue();
 		}
 		
-		Item oldQueueItem = queueList.get(0);
+		Item oldQueueItem = queueList.get(queueList.size()-1);
 		moveToSlot(oldQueueItem);
-		queueList.remove(0);
+		queueList.remove(queueList.size()-1);
+	}
+	
+	public void printQueue() {
+		System.out.print("[");
+		for(Item i: queueList) {
+			System.out.print(i.getDimensions());
+				if (i != queueList.get(queueList.size() - 1)) {
+					System.out.print(", ");
+				}
+			
+		}
+		System.out.println("]");
 	}
 	
 	//For test cases purposes

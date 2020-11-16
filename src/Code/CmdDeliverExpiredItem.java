@@ -8,6 +8,7 @@ public class CmdDeliverExpiredItem implements Command{
 	Warehouse wh = Warehouse.getInstance();
 	private ArrayList<Item> deliveredList = new ArrayList<>();
 	private Day day;
+	private static int deliveredNum;
 	
 	@Override
 	public void execute(String[] cmdParts) {
@@ -25,12 +26,18 @@ public class CmdDeliverExpiredItem implements Command{
 				s.removeItem(i);
 				deliveredList.add(i);
 			}
+			this.deliveredNum = this.deliveredList.size();
 			itemList.clear();
 		}
 		wh.optimize();
 //		addUndoCommand(this);
 //		clearRedoList();
 	}
+	
+	public static int getDeliveredNum() {
+		return deliveredNum;
+	}
+	
 
 //	@Override
 //	public void undoMe() {
