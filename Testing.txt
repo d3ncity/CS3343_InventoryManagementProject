@@ -1,5 +1,8 @@
 startNewDay|12-Oct-2020
 addSlot|5
+addItem|2|13-Oct-2020
+addItem|3|13-Oct-2020
+addItem|4|16-Oct-2020
+addItem|3|15-Oct-2020
 visualize
-undo
-visualize
+startNewDay|14-Oct-2020

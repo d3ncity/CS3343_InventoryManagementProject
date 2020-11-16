@@ -43,7 +43,8 @@ public class Main {
 				//For Execution
 			    if(cmdParts[0].equals("startNewDay")) {
 			    	(new CmdSetDate()).execute(cmdParts);  
-			    	(new CmdDeliverExpiredItem()).execute(cmdParts);  
+			    	(new CmdDeliverExpiredItem()).execute(cmdParts);
+			    	(new CmdAddItemFromQueue()).execute(cmdParts);
 			    }
 			    else if(cmdParts[0].equals("addSlot"))
 				(new CmdAddSlot()).execute(cmdParts);

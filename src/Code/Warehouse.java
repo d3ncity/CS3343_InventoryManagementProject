@@ -178,13 +178,11 @@ public class Warehouse implements Functions{
 	
 	//For Denny's Function
 	public void moveQueueItemToSlot() throws ExEmptyQueue{
-		
 		//empty queue
 		if(queueList.size()==0) {
 			throw new ExEmptyQueue();
 		}
 		
-		//dequeue and put into slot
 		Item oldQueueItem = queueList.get(0);
 		moveToSlot(oldQueueItem);
 		queueList.remove(0);

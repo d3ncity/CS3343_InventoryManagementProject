@@ -1,6 +1,6 @@
 package Code;
 
-public class CmdSetDate extends RecordedCommand{
+public class CmdSetDate implements Command{
 
 	private String prvDate;
 	private String curDate;
@@ -14,8 +14,8 @@ public class CmdSetDate extends RecordedCommand{
 					new Day(curDate).compareTo(SystemDate.getInstance()) == 0)
 				throw new ExInvalidDate();
 			SystemDate.getInstance().set(curDate);
-			addUndoCommand(this);
-			clearRedoList();
+//			addUndoCommand(this);
+//			clearRedoList();
 			
 			System.out.println("System Date Setting Done. Current Date: " + curDate);
 			
@@ -24,16 +24,16 @@ public class CmdSetDate extends RecordedCommand{
 		}
 	}
 
-	@Override
-	public void undoMe() {
-		SystemDate.getInstance().set(prvDate);
-		addRedoCommand(this);		
-	}
-
-	@Override
-	public void redoMe() {
-		SystemDate.getInstance().set(curDate);
-		addUndoCommand(this);
-	}
+//	@Override
+//	public void undoMe() {
+//		SystemDate.getInstance().set(prvDate);
+//		addRedoCommand(this);		
+//	}
+//
+//	@Override
+//	public void redoMe() {
+//		SystemDate.getInstance().set(curDate);
+//		addUndoCommand(this);
+//	}
 
 }
