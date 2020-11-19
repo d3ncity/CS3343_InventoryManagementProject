@@ -8,15 +8,18 @@ public class CmdAddSlot extends RecordedCommand {
 	
 	@Override
 	public void execute(String[] cmdParts) {
-		volume = Integer.parseInt(cmdParts[1]);
+		
 		try {
 			
 			//If the command arguments are less than 3
 			if (cmdParts.length < 2) {
 				throw new ExInsufficientArguments();
 			}
+			
+			volume = Integer.parseInt(cmdParts[1]);
+			
 			//Check if the input is valid
-			if (volume < 1 || volume > 100) {
+			if (volume < 1 || volume > 100 ) {
 				throw new ExOutOfRange();
 			}
 			
@@ -28,6 +31,8 @@ public class CmdAddSlot extends RecordedCommand {
 			System.out.println(e.getMessage());
 		} catch (ExOutOfRange e) {
 			System.out.println(e.getMessage());
+		} catch (NumberFormatException e) {
+			System.out.println("Wrong Input Format!");
 		}
 	}
 

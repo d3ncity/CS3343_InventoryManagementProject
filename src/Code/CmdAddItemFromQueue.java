@@ -7,9 +7,10 @@ public class CmdAddItemFromQueue implements Command{
 	@Override
 	public void execute(String[] cmdParts) {
 		try {
-			for (int i = 0; i < itr; i++) {
+			
+			for (int i = 0; i < itr; i++)
 				Warehouse.getInstance().moveQueueItemToSlot();
-			}			
+			
 		} catch (ExEmptyQueue e) {
 			System.out.println(e.getMessage());
 		}

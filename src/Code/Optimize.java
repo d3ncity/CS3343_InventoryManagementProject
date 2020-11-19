@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 public class Optimize {
 
+	//Instance Field
 	private Slot optimizingSlot;
 	private ArrayList<Item> optimizedItem;
 	private boolean[][] truthTable;
 	private boolean found;
 	
+	//Constructor
 	public Optimize() {
 		this.optimizingSlot = null;
 		this.optimizedItem = new ArrayList<>();

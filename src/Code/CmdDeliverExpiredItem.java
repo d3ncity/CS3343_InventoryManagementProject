@@ -13,23 +13,27 @@ public class CmdDeliverExpiredItem implements Command{
 	@Override
 	public void execute(String[] cmdParts) {
 		
-		day = new Day(cmdParts[1]);
-		ArrayList<Item> itemList = new ArrayList<>();
-		
-		for (Slot s: wh.getSlotList()) {
-			for (Item i : s.getItemsList()) {
-				if (i.getDepartureDate().compareTo(day) <= 0) {
-					itemList.add(i);
+		try {
+			day = new Day(cmdParts[1]);
+			ArrayList<Item> itemList = new ArrayList<>();
+			
+			for (Slot s: wh.getSlotList()) {
+				for (Item i : s.getItemsList()) {
+					if (i.getDepartureDate().compareTo(day) <= 0) {
+						itemList.add(i);
+					}
 				}
+				for (Item i: itemList) {
+					s.removeItem(i);
+					deliveredList.add(i);
+				}
+				CmdDeliverExpiredItem.deliveredNum = this.deliveredList.size();
+				itemList.clear();
 			}
-			for (Item i: itemList) {
-				s.removeItem(i);
-				deliveredList.add(i);
-			}
-			this.deliveredNum = this.deliveredList.size();
-			itemList.clear();
+			wh.optimize();
+		} catch (ExWrongDateFormat e) {
+			System.out.println(e.getMessage());
 		}
-		wh.optimize();
 //		addUndoCommand(this);
 //		clearRedoList();
 	}

@@ -10,13 +10,13 @@ public class Main {
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please input the file pathname: ");
-		String filepathname = in.nextLine();
+//		String filepathname = in.nextLine();
 		
 		Scanner inFile = null;
 		
 		try {
-			inFile = new Scanner(new File(filepathname));
-//			inFile = new Scanner(new File("Testing.txt"));
+//			inFile = new Scanner(new File(filepathname));
+			inFile = new Scanner(new File("./Testing.txt"));
 //			System.out.println("Program Started.");
 			//The first command in the file must be to set the system date 
 			//(eg. "startNewDay 03-Jan-2018"); and it cannot be undone
@@ -25,8 +25,13 @@ public class Main {
 			
 			
 			//Split by vertical bar character '|' (Regular expression: "\|")
-			System.out.println("\n> "+cmdLine1);
-			SystemDate.createTheInstance(cmdLine1Parts[1]);
+			if (cmdLine1Parts.length == 2 && cmdLine1Parts[0].equals("startNewDay")) {
+				SystemDate.createTheInstance(cmdLine1Parts[1]);
+				System.out.println("\n> "+cmdLine1);
+			} else {
+				throw new ExSystemDateIsNotSet();
+			}
+			
 				
 			while(inFile.hasNext()) {
 				
@@ -36,7 +41,7 @@ public class Main {
 				//Blank lines exist in data file as separators.  Skip them.
 			    if(cmdLine.equals("")) continue;
 			    
-			    System.out.println("\n>" + cmdLine);
+			    System.out.println("\n> " + cmdLine);
 			    //split the words in actionLine => create an array of word strings
 			    String[] cmdParts = cmdLine.split("\\|");
 			    
@@ -74,9 +79,13 @@ public class Main {
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!");
-		} catch (NumberFormatException e) {
-			System.out.println("The system date should have format of \"dd-mmName-yyyy\" e.g 12-Oct-2020.");
+		} catch (NoSuchElementException e) {
+			System.out.println("No command is found!");
 		} catch (ExInvalidCommand e){
+			System.out.println(e.getMessage());
+		} catch (ExSystemDateIsNotSet e) {
+			System.out.println(e.getMessage());
+		} catch (ExWrongDateFormat e) {
 			System.out.println(e.getMessage());
 		} finally {
 			//Finished Reading the File

@@ -14,7 +14,7 @@ public class Day implements Cloneable,Comparable<Day>{
 		this.month=m;
 		this.day=d;		
 	}
-	public Day(String sDay) {
+	public Day(String sDay) throws ExWrongDateFormat {
 		this.set(sDay);
 	}
 
@@ -27,9 +27,13 @@ public class Day implements Cloneable,Comparable<Day>{
 		return day;
 	}
 	
-	public void set(String sDay) //Set year,month,day based on a string like 01-Mar-2020
+	public void set(String sDay) throws ExWrongDateFormat //Set year,month,day based on a string like 01-Mar-2020
 	{
 		String[] sDayParts = sDay.split("-");
+		if (sDayParts.length != 3) {
+			throw new ExWrongDateFormat();
+		}
+		
 		this.day = Integer.parseInt(sDayParts[0]); //Apply Integer.parseInt for sDayParts[0];
 		this.year = Integer.parseInt(sDayParts[2]);
 		this.month = MonthNames.indexOf(sDayParts[1])/3+1;

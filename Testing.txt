@@ -1,9 +1,2 @@
-startNewDay|12-Oct-2020
-addSlot|5
-addItem|2|13-Oct-2020
-addItem|3|13-Oct-2020
-addItem|4|16-Oct-2020
-addItem|2|14-Oct-2020
-addItem|3|15-Oct-2020
-visualize
-startNewDay|15-Oct-2020
+startNewDay|13-Oct-2020
+addSlot

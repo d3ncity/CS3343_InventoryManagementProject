@@ -2,12 +2,12 @@ package Code;
 
 public class CmdSetDate implements Command{
 
-	private String prvDate;
+//	private String prvDate;
 	private String curDate;
 	
 	@Override
 	public void execute(String[] cmdParts) {
-		prvDate = SystemDate.getInstance().toString();
+//		prvDate = SystemDate.getInstance().toString();
 		curDate = cmdParts[1];
 		try {
 			if (new Day(curDate).compareTo(SystemDate.getInstance()) == -1 || 
@@ -20,6 +20,8 @@ public class CmdSetDate implements Command{
 			System.out.println("System Date Setting Done. Current Date: " + curDate);
 			
 		} catch (ExInvalidDate e) {
+			System.out.println(e.getMessage());
+		} catch (ExWrongDateFormat e) {
 			System.out.println(e.getMessage());
 		}
 	}

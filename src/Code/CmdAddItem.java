@@ -47,6 +47,10 @@ public class CmdAddItem extends RecordedCommand {
 			System.out.println(e.getMessage());
 		} catch (ExNoSlotInWarehouse e) {
 			System.out.println(e.getMessage());
+		} catch (ExWrongDateFormat e) {
+			System.out.println(e.getMessage());
+		} catch (NumberFormatException e) {
+			System.out.println("Wrong Input Format!");
 		}
 	}
 
