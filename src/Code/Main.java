@@ -10,13 +10,13 @@ public class Main {
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please input the file pathname: ");
-//		String filepathname = in.nextLine();
+		String filepathname = in.nextLine();
 		
 		Scanner inFile = null;
 		
 		try {
-//			inFile = new Scanner(new File(filepathname));
-			inFile = new Scanner(new File("./Testing.txt"));
+			inFile = new Scanner(new File(filepathname));
+//			inFile = new Scanner(new File("./Testing.txt"));
 //			System.out.println("Program Started.");
 			//The first command in the file must be to set the system date 
 			//(eg. "startNewDay 03-Jan-2018"); and it cannot be undone
@@ -92,6 +92,8 @@ public class Main {
 			if (inFile != null)
 				inFile.close();
 			in.close();	
+			Optimize opt = new Optimize();
+			System.out.println(opt.getFound());
 //			System.out.println("Program Ended.");
 		}
 	}

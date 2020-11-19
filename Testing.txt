@@ -1,2 +1,4 @@
 startNewDay|13-Oct-2020
-addSlot
+addSlot|1|15-Oct-2020
+addItem|-1|14-Oct-2020
+optimize
