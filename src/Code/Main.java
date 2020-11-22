@@ -1,12 +1,18 @@
 package Code;
 
 import java.util.*;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException, NumberFormatException {
+		
+		//denny logging addition
+		Logger logger = Logger.getLogger(Main.class);
+		logger.info("Warehouse / Inventory Manager Program START....");
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please input the file pathname: ");
@@ -29,6 +35,8 @@ public class Main {
 				SystemDate.createTheInstance(cmdLine1Parts[1]);
 				System.out.println("\n> "+cmdLine1);
 			} else {
+				//denny logging addition
+				logger.error("Exception thrown - System Date NOT set!");
 				throw new ExSystemDateIsNotSet();
 			}
 			
@@ -74,8 +82,13 @@ public class Main {
 					RecordedCommand.undoOneCommand();
 				else if (cmdParts[0].equals("redo"))
 					RecordedCommand.redoOneCommand();
-				else
+				else {
+					
+					//denny logging addition
+					Exception e = new ExInvalidCommand();
+					logger.error("EXCEPTION: " + e.getMessage());
 					throw new ExInvalidCommand();
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!");
@@ -94,6 +107,8 @@ public class Main {
 			in.close();	
 			Optimize opt = new Optimize();
 			System.out.println(opt.getFound());
+			
+			logger.info("Warehouse / Inventory Manager Program END. Thank you for using our program.");
 //			System.out.println("Program Ended.");
 		}
 	}
