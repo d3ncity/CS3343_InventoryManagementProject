@@ -11,21 +11,24 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Code.CmdAddSlot;
-import Code.CmdOptimize;
-import Code.Day;
-import Code.Item;
-import Code.Optimize;
-import Code.Slot;
-import Code.SystemDate;
-import Code.Warehouse;
+//import Code.CmdAddSlot;
+//import Code.CmdOptimize;
+//import Code.CmdSetDate;
+//import Code.Day;
+//import Code.Item;
+//import Code.Main;
+//import Code.Optimize;
+//import Code.Slot;
+//import Code.SystemDate;
+//import Code.Warehouse;
+import Code.*;
 public class AddNewSlot {
 	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass() throws Exception{
 		SystemDate.createTheInstance("1-Oct-2020");
 		Warehouse wh = Warehouse.getInstance();
 	}
@@ -42,7 +45,6 @@ public class AddNewSlot {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		
 	}
 
 	/**
@@ -56,7 +58,10 @@ public class AddNewSlot {
 	void testAddNewSlot1() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
+//	    SystemDate.createTheInstance("13-Oct-2020");
+	    String dateSet = "setNewDay|13-Oct-2020";
+	    String [] dateParts = dateSet.split("\\|");
+	    (new CmdSetDate()).execute(dateParts);
 	    String cmdLine = "addSlot|-1";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts);
@@ -70,7 +75,9 @@ public class AddNewSlot {
 	void testAddNewSlot2() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
+	    String dateSet = "setNewDay|13-Oct-2020";
+	    String [] dateParts = dateSet.split("\\|");
+	    (new CmdSetDate()).execute(dateParts);
 	    String cmdLine = "addSlot|101";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts);
@@ -84,7 +91,9 @@ public class AddNewSlot {
 	void testAddNewSlot3() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
+	    String dateSet = "setNewDay|13-Oct-2020";
+	    String [] dateParts = dateSet.split("\\|");
+	    (new CmdSetDate()).execute(dateParts);
 	    String cmdLine = "addSlot";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts);
@@ -98,7 +107,9 @@ public class AddNewSlot {
 	void testAddNewSlot4() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
+	    String dateSet = "setNewDay|13-Oct-2020";
+	    String [] dateParts = dateSet.split("\\|");
+	    (new CmdSetDate()).execute(dateParts);
 	    String cmdLine = "addSlot|4";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts);
@@ -111,7 +122,9 @@ public class AddNewSlot {
 	void testAddNewSlot5() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
+	    String dateSet = "setNewDay|13-Oct-2020";
+	    String [] dateParts = dateSet.split("\\|");
+	    (new CmdSetDate()).execute(dateParts);
 	    String cmdLine = "addingSlot|5";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts);
@@ -129,6 +142,6 @@ public class AddNewSlot {
 	    (new CmdAddSlot()).execute(cmdParts);
 
 	    //String msg = "Checking when the size of the item is less than 1";
-	    assertEquals("Invalid Slot Dimension Input!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
+	    assertEquals("Volume Out Of Range. The size can only be (1-100).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	}	
 }
