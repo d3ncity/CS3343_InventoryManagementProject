@@ -38,7 +38,7 @@ public class testCmdListWarehouse {
 	}
 	
 	@Test
-	void testListWarehouse1 () {
+	void testListWarehouse1 () { //This test case is working fine
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		String nl = System.lineSeparator();
@@ -53,7 +53,7 @@ public class testCmdListWarehouse {
 	}
 	
 	@Test
-	void testListWarehouse2 () {
+	void testListWarehouse2 () { //This test case is showinf the output of the first test case
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		//String nl = System.lineSeparator();
@@ -71,7 +71,7 @@ public class testCmdListWarehouse {
 	}
 	
 	@Test //Showing a comparision error
-	void testListWarehouse3 () {
+	void testListWarehouse3 () { //This test case is showinf the output of the first test case
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		String nl = System.lineSeparator();
