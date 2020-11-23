@@ -26,11 +26,6 @@ class CmdAddItemTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		SystemDate.createTheInstance("1-Oct-2020");
-		Slot slot1 = new Slot(1);
-		Slot slot2 = new Slot(2);
-		Slot slot3 = new Slot(3);
-		Slot slot4 = new Slot(4);
-		Slot slot5 = new Slot(5);
 	}
 
 	@AfterAll
@@ -44,11 +39,30 @@ class CmdAddItemTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	void testCmdAddItem_01() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
+	    
+	    String cmdLine = "addItem|3|10-Oct-2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdAddItem()).execute(cmdParts);
+	    
+	    String msg = "Checking when there is no slot in the warehouse yet";
+	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	}
+	
+	@Test
+	void testCmdAddItem_02() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 	    
 	    String cmdLine = "addItem|3|10-Oct-2020";
 	    String [] cmdParts = cmdLine.split("\\|");
@@ -59,7 +73,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_02() {
+	void testCmdAddItem_03() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -72,7 +86,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_03() {
+	void testCmdAddItem_04() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -85,7 +99,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_04() {
+	void testCmdAddItem_05() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -98,7 +112,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_05() {
+	void testCmdAddItem_06() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -111,7 +125,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_06() {
+	void testCmdAddItem_07() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -124,7 +138,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_07() {
+	void testCmdAddItem_08() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -162,7 +176,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_08() {
+	void testCmdAddItem_09() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -186,7 +200,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_09() {
+	void testCmdAddItem_10() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
@@ -211,7 +225,7 @@ class CmdAddItemTest {
 	}
 	
 	@Test
-	void testCmdAddItem_10() {
+	void testCmdAddItem_11() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 

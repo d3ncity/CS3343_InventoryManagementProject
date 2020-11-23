@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 startNewDay|12-Oct-2020
 addSlot|5
 addSlot|6
@@ -18,3 +19,9 @@ startNewDay|14-Oct-2020
 visualize
 startNewDay|16-Oct-2020
 visualize
+=======
+startNewDay|13-Oct-2020
+addSlot|1|15-Oct-2020
+addItem|-1|14-Oct-2020
+optimize
+>>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
