@@ -125,11 +125,10 @@ public class AddNewSlot {
 	    String dateSet = "setNewDay|13-Oct-2020";
 	    String [] dateParts = dateSet.split("\\|");
 	    (new CmdSetDate()).execute(dateParts);
-	    String cmdLine = "addingSlot|5";
+	    String cmdLine = "addingSlot|1";
 	    String [] cmdParts = cmdLine.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts);
-	    System.out.println(outContent.toString());
-	    assertEquals("Invalid Command!", outContent.toString());
+	    Main.acceptCmd(cmdParts);
+	    assertEquals("Invalid Command!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	}
 	
 	@Test //When input given is 0, there is a conflict between the error messages, Ivalid slot input & Volume Out of Range!!
