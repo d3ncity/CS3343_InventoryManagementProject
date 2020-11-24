@@ -205,20 +205,17 @@ public class Warehouse implements Functions{
 	public boolean testResult() {return added;}
 	
 	//Optimize Algorithm
-	//Algorithm Step 1: Allocate the items to buffer
 	private ArrayList<Item> itemsBuffer  = new ArrayList<>();	
 	public void allocateAllItemToBuffer() {
 		ArrayList<Item> temp = new ArrayList<>();
 		for(Slot s: slots) {
-			if (s.getFreeVolume() != s.getVolume()) {
-				for (Item i : s.getItemsList()) {
-					temp.add(i);				
-					itemsBuffer.add(i);
-				}
-				for (int i = 0; i < temp.size(); i++)
-					s.removeItem(temp.get(i));
-				temp.clear();
+			for (Item i : s.getItemsList()) {
+				temp.add(i);				
+				itemsBuffer.add(i);
 			}
+			for (int i = 0; i < temp.size(); i++)
+				s.removeItem(temp.get(i));
+			temp.clear();
 		}
 	}
 	
