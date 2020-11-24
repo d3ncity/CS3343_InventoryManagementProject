@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import Code.*;
 
-public class testCmdListSlotByID {
+public class testCmdListItemByID {
 	
 
 	@BeforeAll
@@ -38,7 +38,7 @@ public class testCmdListSlotByID {
 	}
 	
 	@Test
-	void testFindSlotByID_1 () {
+	void testFindItemByID_1 () {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		String nl = System.lineSeparator();
