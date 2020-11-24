@@ -26,6 +26,7 @@ public class Optimize {
 				slot.addItem(i);
 				item = i;
 				found = true;
+				break;
 			}
 		}
 		list.remove(item);
@@ -41,21 +42,18 @@ public class Optimize {
 	}
 	
 	private boolean checkPerfectSubset(ArrayList<Item> list, int length, int sum) {
-		if (length == 0 || sum <= 0) {
+		if (length == 0 || sum <= 0)
 			return false;
-		}
 			
         //Constructing truth table
 		truthTable = new boolean[length][sum + 1];
 		
 		//Sum 0 equals true for empty set
-        for (int i=0; i<length; ++i) { 
-            truthTable[i][0] = true;   
-        } 
+        for (int i=0; i<length; ++i)
+            truthTable[i][0] = false;
         
-        if (list.get(0).getDimensions() <= sum) {
+        if (list.get(0).getDimensions() <= sum)
             truthTable[0][list.get(0).getDimensions()] = true; 
-        }
 
         for (int i = 1; i < length; ++i) {
             for (int j = 0; j < sum + 1; ++j) {
@@ -67,9 +65,7 @@ public class Optimize {
         
         //Check if desire sum have any subset in the ArrayList
         if (truthTable[length-1][sum] == false) 
-        {
             return false; 
-        }
 		return true; 
 	}
 	

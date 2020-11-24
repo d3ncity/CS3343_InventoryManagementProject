@@ -12,18 +12,16 @@ public class Main {
 		
 		//denny logging addition
 		Logger logger = Logger.getLogger(Main.class);
-		logger.info("Warehouse / Inventory Manager Program START....");
+		logger.info("Warehouse Management System Program START....");
 		
 		Scanner in = new Scanner(System.in);
-		System.out.println("Please input the file pathname: ");
+		System.out.print("Please input the file pathname: ");
 		String filepathname = in.nextLine();
 		
 		Scanner inFile = null;
 		
 		try {
 			inFile = new Scanner(new File(filepathname));
-//			inFile = new Scanner(new File("./Testing.txt"));
-//			System.out.println("Program Started.");
 			//The first command in the file must be to set the system date 
 			//(eg. "startNewDay 03-Jan-2018"); and it cannot be undone
 			String cmdLine1 = inFile.nextLine();
