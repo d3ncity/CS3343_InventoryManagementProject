@@ -17,11 +17,13 @@ import Code.CmdListItemByID;
 import Code.CmdSetDate;
 import Code.Slot;
 import Code.SystemDate;
+import Code.Warehouse;
 
 class CmdListItemByIDTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		Warehouse.getInstance().reset();
 		SystemDate.createTheInstance("1-Oct-2020");
 		Slot slot1 = new Slot(1);
 		Slot slot2 = new Slot(2);

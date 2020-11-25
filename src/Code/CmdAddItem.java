@@ -30,7 +30,7 @@ public class CmdAddItem extends RecordedCommand {
 			}
 			if (dimension < 1 || dimension > Warehouse.getInstance().getTheLargestSlotSize()) {
 				throw new ExInvalidItemDimension(
-						"Invalid Dimension Input!\nThe size should be >0 and <="+
+						"Invalid Dimension Input! The size should be >0 and <="+
 				Warehouse.getInstance().getTheLargestSlotSize()+" (The largest slot size).");
 			}
 			

@@ -15,11 +15,13 @@ import Code.CmdAddItem;
 import Code.CmdSetDate;
 import Code.RecordedCommand;
 import Code.SystemDate;
+import Code.Warehouse;
 
 class CmdSetDateTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		Warehouse.getInstance().reset();
 		SystemDate.createTheInstance("1-Oct-2020");
 	}
 

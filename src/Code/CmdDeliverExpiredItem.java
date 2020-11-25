@@ -30,7 +30,7 @@ public class CmdDeliverExpiredItem implements Command{
 				CmdDeliverExpiredItem.deliveredNum = this.deliveredList.size();
 				itemList.clear();
 			}
-			//wh.optimize();
+			wh.optimize();
 		} catch (ExWrongDateFormat e) {
 			System.out.println(e.getMessage());
 		}

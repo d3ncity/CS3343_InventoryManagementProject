@@ -26,6 +26,7 @@ class CmdAddItemFromQueueTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		Warehouse.getInstance().reset();
 		SystemDate.createTheInstance("1-Oct-2020");
 		Slot slot1 = new Slot(1);
 		Slot slot2 = new Slot(2);

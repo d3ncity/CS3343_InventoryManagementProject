@@ -119,7 +119,7 @@ public class Optimize {
 	
     private void rearrangeSubset(ArrayList<Item> result, ArrayList<Item> list){
     	found = true;
-    	System.out.println("Optimized!");
+//    	System.out.println("Optimized!");
     	for (int i = 0; i < result.size(); i++) {
     		this.optimizingSlot.addItem(result.get(i));
     		this.optimizedItem.add(result.get(i));

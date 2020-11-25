@@ -10,6 +10,7 @@ public class CmdSetDate implements Command{
 //		prvDate = SystemDate.getInstance().toString();
 		curDate = cmdParts[1];
 		try {
+			
 			if (new Day(curDate).compareTo(SystemDate.getInstance()) == -1 || 
 					new Day(curDate).compareTo(SystemDate.getInstance()) == 0)
 				throw new ExInvalidDate();

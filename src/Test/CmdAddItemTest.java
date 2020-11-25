@@ -26,6 +26,7 @@ class CmdAddItemTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		SystemDate.createTheInstance("1-Oct-2020");
+		Warehouse.getInstance().reset();
 	}
 
 	@AfterAll
@@ -82,7 +83,7 @@ class CmdAddItemTest {
 	    (new CmdAddItem()).execute(cmdParts);
 
 	    String msg = "Checking when the size of the item is bigger than any slot";
-	    assertEquals("The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -95,7 +96,7 @@ class CmdAddItemTest {
 	    (new CmdAddItem()).execute(cmdParts);
 
 	    String msg = "Checking when the size of the item is less than 1";
-	    assertEquals("The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
