@@ -232,12 +232,12 @@ class OptimizeTest {
 		
 		System.out.println("Before Optimized:");
 		System.out.println("__________________________________________");
-		wh.printAllSlotsDetails();
+//		wh.printAllSlotsDetails();
 		//Things to discuss, when should we automatically optimized
 		wh.optimize();
 		System.out.println("After Optimized:");
 		System.out.println("__________________________________________");
-		wh.printAllSlotsDetails();
+//		wh.printAllSlotsDetails();
 		assertEquals("Slot #" + slot2.getSlotID() + " is Full!", outContent.toString());
 	}
 	

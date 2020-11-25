@@ -62,6 +62,12 @@ public class Warehouse implements Functions{
 	public int getTotalNoOfSlots() {return totalNoOfSlots;}
 	public int assignSlotID() {return ++totalNoOfSlots;}
 	
+	public void reset() {
+		totalNoOfSlots = 0;
+		totalNoOfItems = 0;
+		slots.clear();
+	}
+	
 	/*
 	 * Methods of Slots
 	 * 1. +addSlots
@@ -92,21 +98,33 @@ public class Warehouse implements Functions{
 	 * 1. +printAllSlotsDetails
 	 * 2. +printAllSlotsArray
 	 */
-	public void printAllSlotsDetails() {
+//	public void printAllSlotsDetails() {
+//		for(Slot s: slots) {
+//			System.out.println("----------------------------------");
+//			if(s.getFreeVolume()==s.getVolume()){
+//				System.out.println("Slot #"+ s.getSlotID() +" is empty, volume is "+ s.getVolume());
+//			}
+//			else {
+//				if(s.getFreeVolume()==0){
+//					System.out.println("Slot #" + s.getSlotID() + " is Full!");
+//				}
+//				System.out.println("Slot #"+ s.getSlotID() +", volume is "+ s.getVolume()+ ", free volume is "+ s.getFreeVolume());
+//				s.printItemsInSlot();
+//			}
+//		}
+//		System.out.println("----------------------------------");
+//	}
+	
+	public void printAllSlotsStatus() {
 		for(Slot s: slots) {
-			System.out.println("----------------------------------");
 			if(s.getFreeVolume()==s.getVolume()){
 				System.out.println("Slot #"+ s.getSlotID() +" is empty, volume is "+ s.getVolume());
-			}
-			else {
-				if(s.getFreeVolume()==0){
+			} else if(s.getFreeVolume()==0){
 					System.out.println("Slot #" + s.getSlotID() + " is Full!");
-				}
+			} else {
 				System.out.println("Slot #"+ s.getSlotID() +", volume is "+ s.getVolume()+ ", free volume is "+ s.getFreeVolume());
-				s.printItemsInSlot();
 			}
 		}
-		System.out.println("----------------------------------");
 	}
 	
 	public void printAllSlotsArray() {
@@ -241,6 +259,7 @@ public class Warehouse implements Functions{
             	itemsBuffer.remove(optList.get(i));
             opt.reset();
     	}
-	}	
+	}
+	
 	
 }
