@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import Code.*;
 
-public class testCmdListItemByID {
+public class testCmdListSlotByID {
 	
 	PrintStream standardOut = System.out;
 	
