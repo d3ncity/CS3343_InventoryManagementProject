@@ -1,4 +1,6 @@
 startNewDay|13-Oct-2020
-addSlot|1
-addItem|1|14-Oct-2020
-listWarehouse
+addSlot|2
+addSlot|3
+addSlot|4
+addItem|3|14-Oct-2020
+listSlotByID|2
