@@ -23,7 +23,7 @@ import Code.*;
 class OptimizeTest {
 
 	PrintStream stdOut = System.out;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		Warehouse.getInstance().setAutomation(false);
@@ -45,71 +45,70 @@ class OptimizeTest {
 	void tearDown() throws Exception {
 		System.setOut(stdOut);
 	}
-	
+
 	@Test
-	void testOptimize2()
-	{	
+	void testOptimize2() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		String cmdLine = "startNewDay|13-Oct-2020";
-		String [] cmdParts = cmdLine.split("\\|");
+		String[] cmdParts = cmdLine.split("\\|");
 		(new CmdSetDate()).execute(cmdParts);
 		String cmdLine1 = "addSlot|5";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|5|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine6 = "optimize";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts6);
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|5|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine6 = "optimize";
+		String[] cmdParts6 = cmdLine6.split("\\|");
+		(new CmdOptimize()).execute(cmdParts6);
 //	    String cmdLine6 = "optimize";
 //	    String [] cmdParts6 = cmdLine6.split("\\|");
 //	    (new Optimize()).findOnePerfectFit(itemArray, cmdLine);
 //	    String cmdLine6 = "listSlotByID|1";    
 //	    String [] cmdParts6 = cmdLine6.split("\\|");
 //		(new CmdListSlotByID()).execute(cmdParts6);
-	    String expectedResults2 = "Manually Optimized!";
-	    String[] output = outContent.toString().split("\n");
-	    assertEquals(expectedResults2, output[output.length - 1].trim());
+		String expectedResults2 = "Manually Optimized!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults2, output[output.length - 1].trim());
 	}
-	
+
 	@Test
-	
+
 	void testOptimize1() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|5";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addSlot|5";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts2);
-	    String cmdLine3 = "addItem|2|14-Oct-2020";
-	    String [] cmdParts3 = cmdLine3.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts3);
-	    String cmdLine4 = "addItem|1|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine5 = "addItem|3|14-Oct-2020";
-	    String [] cmdParts5 = cmdLine5.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts5);
-	    String cmdLine6 = "optimize";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts6);
-	    String cmdLine7 = "listSlotByID|1";
-	    String [] cmdParts7 = cmdLine7.split("\\|");
-	    (new CmdListSlotByID()).execute(cmdParts7);
-	    String expectedResults1 = "1. Dimensions for Item #3 is 3, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-	    String expectedResults2 = "2. Dimensions for Item #1 is 2, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-		//String expectedResults ="Manually Optimized!";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-2].trim());
-		assertEquals(expectedResults2, output[output.length-1].trim());
+		String cmdLine1 = "addSlot|5";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine2 = "addSlot|5";
+		String[] cmdParts2 = cmdLine2.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts2);
+		String cmdLine3 = "addItem|2|14-Oct-2020";
+		String[] cmdParts3 = cmdLine3.split("\\|");
+		(new CmdAddItem()).execute(cmdParts3);
+		String cmdLine4 = "addItem|1|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine5 = "addItem|3|14-Oct-2020";
+		String[] cmdParts5 = cmdLine5.split("\\|");
+		(new CmdAddItem()).execute(cmdParts5);
+		String cmdLine6 = "optimize";
+		String[] cmdParts6 = cmdLine6.split("\\|");
+		(new CmdOptimize()).execute(cmdParts6);
+		String cmdLine7 = "listSlotByID|1";
+		String[] cmdParts7 = cmdLine7.split("\\|");
+		(new CmdListSlotByID()).execute(cmdParts7);
+		String expectedResults1 = "1. Dimensions for Item #3 is 3, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
+		String expectedResults2 = "2. Dimensions for Item #1 is 2, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
+		// String expectedResults ="Manually Optimized!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
 	}
-	
+
 //--------------------------------------------------------------------------------------------------//	
-	//Not able to cover the findSubsetRecur  and the beloe part
+	// Not able to cover the findSubsetRecur and the beloe part
 //	// If given sum can be achieved after ignoring current element. 
 //    if (truthTable[length-1][sum]) 
 //    { 
@@ -118,195 +117,220 @@ class OptimizeTest {
 //        temp.addAll(result); 
 //        findSubsetRecur(list, length-1, sum, temp); 
 //    } 
-	//This is for the testOptimize3()
-	//--------------------------------------------------------------------------------------------------//
-	@Test 
+	// This is for the testOptimize3()
+	// --------------------------------------------------------------------------------------------------//
+	@Test
 	void testOptimize3() {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|5";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addSlot|5";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts2);
-	    String cmdLine3 = "addSlot|3";
-	    String [] cmdParts3 = cmdLine3.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts3);
-	    String cmdLine4 = "addItem|5|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine5 = "addItem|5|14-Oct-2020";
-	    String [] cmdParts5 = cmdLine5.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts5);
-	    String cmdLine6 = "addItem|2|14-Oct-2020";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts6);
-	    String cmdLine7 = "addItem|1|14-Oct-2020";
-	    String [] cmdParts7 = cmdLine7.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts7);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String cmdLine9 = "listSlotByID|1";
-	    String [] cmdParts9 = cmdLine9.split("\\|");
-	    (new CmdListSlotByID()).execute(cmdParts9);
-	    String expectedResults1 = "1. Dimensions for Item #3 is 5, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-	    String expectedResults2 = "2. Dimensions for Item #1 is 5, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-	    String expectedResults3 = "3. Dimensions for Item #1 is 2, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-	    String expectedResults4 = "4. Dimensions for Item #1 is 1, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-	    String[] output = outContent.toString().split("\n");
+		String cmdLine1 = "addSlot|5";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine2 = "addSlot|5";
+		String[] cmdParts2 = cmdLine2.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts2);
+		String cmdLine3 = "addSlot|3";
+		String[] cmdParts3 = cmdLine3.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts3);
+		String cmdLine4 = "addItem|5|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine5 = "addItem|5|14-Oct-2020";
+		String[] cmdParts5 = cmdLine5.split("\\|");
+		(new CmdAddItem()).execute(cmdParts5);
+		String cmdLine6 = "addItem|2|14-Oct-2020";
+		String[] cmdParts6 = cmdLine6.split("\\|");
+		(new CmdAddItem()).execute(cmdParts6);
+		String cmdLine7 = "addItem|1|14-Oct-2020";
+		String[] cmdParts7 = cmdLine7.split("\\|");
+		(new CmdAddItem()).execute(cmdParts7);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String cmdLine9 = "listWarehouse";
+		String[] cmdParts9 = cmdLine9.split("\\|");
+		(new CmdListWarehouse()).execute(cmdParts9);
+		String expectedResults1 = "Manually Optimized!";
+	    String expectedResults2 = "Slot #3 is Full!";
+	    String expectedResults3 = "Slot #1 is Full!";
+	    String expectedResults4 = "Slot #2 is Full!";
+		String[] output = outContent.toString().split("\n");
 		assertEquals(expectedResults1, output[output.length-4].trim());
 		assertEquals(expectedResults2, output[output.length-3].trim());
 		assertEquals(expectedResults3, output[output.length-2].trim());
 		assertEquals(expectedResults4, output[output.length-1].trim());
 	}
-	
-	@Test
-	void testOptimize4() throws ExOutOfRange{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|5";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|-5|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize5() throws ExOutOfRange{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|0";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|5|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize6() throws ExOutOfRange{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|-1";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|-1|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize7() throws ExOutOfRange{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|2";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|12345678|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize8() throws ExOutOfRange{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|0";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|0|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize9() throws ExInvalidItemDimension{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|5";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|-5|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Invalid Dimension Input!";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
-	@Test
-	void testOptimize10() throws ExInvalidDate{
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|0";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|0|32-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Error. The date is before or equals to system date.";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
-	}
-	
 
 	@Test
-	void testOptimize11() throws ExInvalidDate{
+	void testOptimize4() throws ExOutOfRange {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|0";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine4 = "addItem|0|31-10-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
-	    String cmdLine8 = "optimize";
-	    String [] cmdParts8 = cmdLine8.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts8);
-	    String expectedResults1 = "Error. The date is before or equals to system date.";
-	    String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
+		String cmdLine1 = "addSlot|5";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|-5|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
 	}
-	
+
+	@Test
+	void testOptimize5() throws ExOutOfRange {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|0";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|5|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize6() throws ExOutOfRange {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|-1";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|-1|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize7() throws ExOutOfRange {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|12345678|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Invalid Dimension Input! The size should be >0 and <=2 (The largest slot size).";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize8() throws ExOutOfRange {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|0";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|0|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize9() throws ExInvalidItemDimension {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|5";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|-5|14-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize10() throws ExInvalidDate {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|0";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|0|32-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
+	}
+
+	@Test
+	void testOptimize11() throws ExInvalidDate {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|0";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|0|31-10-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Volume Out Of Range. The size can only be (1-100).";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
+	}
+
 //	
 //	@Test
 //	void testOptimize2()
@@ -511,5 +535,5 @@ class OptimizeTest {
 ////		wh.printAllSlotsDetails();
 //		assertEquals("Slot #" + slot2.getSlotID() + " is Full!", outContent.toString());
 //	}
-	
+
 }
