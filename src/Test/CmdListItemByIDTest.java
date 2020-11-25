@@ -40,7 +40,7 @@ class CmdListItemByIDTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		
+
 	}
 
 	@Test
@@ -53,7 +53,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts);
 	    
 	    String msg = "Checking when there is no items in the warehouse yet";
-	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts);
 	    
 	    String msg = "Checking when ID is invalid";
-	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts);
 	    
 	    String msg = "Checking when ID is invalid";
-	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 	@Test
@@ -96,7 +96,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts1);
 	    
 	    String msg = "Basic situation";
-	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Current Slot #3 ;Dimensions for Item #1 is 3; Arrival Date: 1-Oct-2020, Departure Date: 10-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts1);
 	    
 	    String msg = "Checking when the item has expired delivery date";
-	    assertEquals("Error. No slot has been created yet!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 

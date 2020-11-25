@@ -13,30 +13,6 @@ public class Warehouse implements Functions{
 	private ArrayList<Slot> slots;
 	private int totalNoOfItems = 0;
 	private int totalNoOfSlots = 0;
-<<<<<<< HEAD
-	private final int AUTONUM = 3;
-	
-	//Singleton Pattern
-	private static Warehouse instance = new Warehouse();
-	private Warehouse() {this.slots = new ArrayList<>();}
-	public static Warehouse getInstance() {return instance;}
-	
-	//Getters
-	public int getAutoNum() {return AUTONUM;}
-	public ArrayList<Slot> getSlotList() {return slots;}
-	
-	/*
-	 * Methods for Warehouse
-	 */
-	public boolean warehouseHalfFull() {
-		int totalVolume = 0;
-		int totalFreeVolume = 0;
-		for (Slot s: slots) {
-			totalVolume += s.getVolume();
-			totalFreeVolume += s.getFreeVolume();
-		}
-		return totalFreeVolume <= (totalVolume/2);
-=======
 	private ArrayList<Item> queueList;
 	
 	//Singleton Pattern
@@ -71,7 +47,6 @@ public class Warehouse implements Functions{
 			for (Slot s: slots)
 				if (s.getItemsList().size() != 0) return false;
 		return true;
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	}
 	
 	/*
@@ -94,10 +69,6 @@ public class Warehouse implements Functions{
 	 * 3. +getTheLargestSlotSize
 	 * 4. +findSlotByID
 	 */
-<<<<<<< HEAD
-//	public void setSlots(ArrayList<Slot> slots) {this.slots = slots;}
-=======
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	public void addSlots(Slot slot) {
 		slots.add(slot);
 		Collections.sort(slots);
@@ -107,13 +78,7 @@ public class Warehouse implements Functions{
 		slots.remove(slot);
 		System.out.println("Slot #" + slot.getSlotID() + " is removed.");
 	}
-<<<<<<< HEAD
-	public int getTheLargestSlotSize() {
-		return slots.get(slots.size()-1).getVolume();
-	}
-=======
 	public int getTheLargestSlotSize() {return slots.get(slots.size()-1).getVolume();}
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	public Slot findSlotByID(int ID) {
 		for (Slot s: slots) {
 			if (s.getSlotID() == ID)
@@ -175,11 +140,7 @@ public class Warehouse implements Functions{
 	}
 	
 	//1. Search for perfect fitted slot
-<<<<<<< HEAD
-	//2. Search any availble slots
-=======
 	//2. Search any available slots
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	private Slot searchSlotForItem(Item item) {
 		for (Slot s: slots) {
 			if (s.getFreeVolume() == item.getDimensions())
@@ -192,12 +153,7 @@ public class Warehouse implements Functions{
 		return null;
 	}
 	
-<<<<<<< HEAD
-	ArrayList<Item> queueList = new ArrayList<>();
-	@Override
-=======
 	
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	public void moveToSlot(Item item) {
 		//For testing purposes
 		added = false;
@@ -207,13 +163,8 @@ public class Warehouse implements Functions{
 		if(s != null) {
 			s.addItem(item);
 			item.setCurrentSlot(s);	
-<<<<<<< HEAD
-            //if (s.getFreeVolume() == 0) 
-            	//System.out.println("Slot #"+ s.getSlotID() +" is Full!");
-=======
             if (s.getFreeVolume() == 0) 
-            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
+           // 	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
             
 			//For testing purposes
 			added = true;
@@ -221,27 +172,13 @@ public class Warehouse implements Functions{
 		else {
 			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
 			queueList.add(item);
-<<<<<<< HEAD
-=======
 			Collections.sort(queueList, new SortQueue());
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 			//For testing purposes
 			added = false;
 		}
 		
-<<<<<<< HEAD
-		/*if(warehouseHalfFull()) {
-			optimize();
-		}*/
-		
-	}
-	
-	//For Denny's Function
-	public void moveQueueItemToSlot() {
-
-=======
-		if(warehouseHalfFull())
-			optimize();
+		/*if(warehouseHalfFull())
+			optimize();*/
 	}
 	
 	//Moving item from the queue to the slot
@@ -261,7 +198,6 @@ public class Warehouse implements Functions{
 					System.out.print(", ");
 		}
 		System.out.println("]");
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 	}
 	
 	//For test cases purposes
@@ -294,30 +230,17 @@ public class Warehouse implements Functions{
             if (s.getFreeVolume() == 0) 
             	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
             
-<<<<<<< HEAD
-            if (!opt.getFound()) {
-                for (int i = 0; i < s.getVolume(); i++) {
-                    opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
-                }
-            }
-            
-=======
             //Find multiple items which can perfectly fit the slot when combine.
             if (!opt.getFound())
                 for (int i = 0; i < s.getVolume(); i++)
                     opt.findOnePerfectSubsets(itemsBuffer, itemsBuffer.size(), s.getFreeVolume()-i, s); 
 
             //Remove the item from buffer list
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
             ArrayList<Item> optList = opt.getOptimizedItem();
             for (int i = 0; i < optList.size(); i++)
             	itemsBuffer.remove(optList.get(i));
             opt.reset();
     	}
-	}	
+	}
 	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7

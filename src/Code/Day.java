@@ -27,11 +27,6 @@ public class Day implements Cloneable,Comparable<Day>{
 		return day;
 	}
 	
-<<<<<<< HEAD
-	public void set(String sDay) //Set year,month,day based on a string like 01-Mar-2020
-	{
-		String[] sDayParts = sDay.split("-");
-=======
 	public void set(String sDay) throws ExWrongDateFormat //Set year,month,day based on a string like 01-Mar-2020
 	{
 		String[] sDayParts = sDay.split("-");
@@ -39,7 +34,6 @@ public class Day implements Cloneable,Comparable<Day>{
 			throw new ExWrongDateFormat();
 		}
 		
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 		this.day = Integer.parseInt(sDayParts[0]); //Apply Integer.parseInt for sDayParts[0];
 		this.year = Integer.parseInt(sDayParts[2]);
 		this.month = MonthNames.indexOf(sDayParts[1])/3+1;
@@ -59,20 +53,20 @@ public class Day implements Cloneable,Comparable<Day>{
 	}
 	
 	// check if y,m,d valid
-	public boolean valid()
+	static public boolean valid(int y, int m, int d)
 	{
-		if (this.month < 1 || this.month > 12 || this.day < 1) return false;
-		switch(this.month){
+		if (m<1 || m>12 || d<1) return false;
+		switch(m){
 			case 1: case 3: case 5: case 7:
 			case 8: case 10: case 12:
-					 return this.day<=31; 
+					 return d<=31; 
 			case 4: case 6: case 9: case 11:
-					 return this.day<=30; 
+					 return d<=30; 
 			case 2:
-					 if (isLeapYear(this.year))
-						 return this.day<=29; 
+					 if (isLeapYear(y))
+						 return d<=29; 
 					 else
-						 return this.day<=28; 
+						 return d<=28; 
 		}
 		return false;
 	}

@@ -82,7 +82,7 @@ class CmdAddItemTest {
 	    (new CmdAddItem()).execute(cmdParts);
 
 	    String msg = "Checking when the size of the item is bigger than any slot";
-	    assertEquals("Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -95,7 +95,7 @@ class CmdAddItemTest {
 	    (new CmdAddItem()).execute(cmdParts);
 
 	    String msg = "Checking when the size of the item is less than 1";
-	    assertEquals("Invalid Dimension Input! The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("The size should be >0 and <=5 (The largest slot size).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -180,7 +180,7 @@ class CmdAddItemTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
-	    String cmdLine = "startNewDay|14-Oct-2020";
+	    String cmdLine = "startNewDay|15-Oct-2020";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdSetDate()).execute(cmdParts);
 	    (new CmdDeliverExpiredItem()).execute(cmdParts);

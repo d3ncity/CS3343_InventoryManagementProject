@@ -30,11 +30,7 @@ public class CmdAddItem extends RecordedCommand {
 			}
 			if (dimension < 1 || dimension > Warehouse.getInstance().getTheLargestSlotSize()) {
 				throw new ExInvalidItemDimension(
-<<<<<<< HEAD
-						"Invalid Dimension Input! The size should be >0 and <="+
-=======
 						"Invalid Dimension Input!\nThe size should be >0 and <="+
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 				Warehouse.getInstance().getTheLargestSlotSize()+" (The largest slot size).");
 			}
 			
@@ -51,13 +47,10 @@ public class CmdAddItem extends RecordedCommand {
 			System.out.println(e.getMessage());
 		} catch (ExNoSlotInWarehouse e) {
 			System.out.println(e.getMessage());
-<<<<<<< HEAD
-=======
 		} catch (ExWrongDateFormat e) {
 			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
 			System.out.println("Wrong Input Format!");
->>>>>>> aa6393ef26ac5c37fdfd69c026083b84a07f74e7
 		}
 	}
 
