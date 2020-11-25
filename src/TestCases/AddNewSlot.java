@@ -164,8 +164,17 @@ public class AddNewSlot {
 	    String [] cmdParts3 = cmdLine3.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts3);
 	    
-	    String msg = "Checking undo command for CmdAddSlot";
-	    assertEquals("Item #6 with size(5) is added in Slot ID #5 ", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	   // String msg = "Checking undo command for CmdAddSlot";
+	    //ssertEquals("Item #6 with size(5) is added in Slot ID #5 ", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    String expectedResults1 = "System Date Setting Done. Current Date: 15-Oct-2020";
+		String expectedResults2 = "Slot #2 is created and added.";
+		String expectedResults3 = "Slot #2 is removed.";
+		String expectedResults4 = "Slot #3 is created and added.";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 4].trim());
+		assertEquals(expectedResults2, output[output.length - 3].trim());
+		assertEquals(expectedResults3, output[output.length - 2].trim());
+		assertEquals(expectedResults4, output[output.length - 1].trim());
 	}
 	
 	@Test
@@ -173,7 +182,7 @@ public class AddNewSlot {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
-	    String cmdLine = "startNewDay|15-Oct-2020";
+	    String cmdLine = "startNewDay|1-Oct-2020";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdSetDate()).execute(cmdParts);
 	    (new CmdDeliverExpiredItem()).execute(cmdParts);
@@ -188,12 +197,19 @@ public class AddNewSlot {
 	    String [] cmdParts3 = cmdLine3.split("\\|");
 	    (new CmdAddSlot()).execute(cmdParts3);
 	    
-	    String msg = "Checking redo command for CmdAddSlot";
-	    assertEquals("Item #6 with size(5) is added in Slot ID #5 ", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    String expectedResults1 = "Error. The date is before or equals to system date.";
+		String expectedResults2 = "Slot #4 is created and added.";
+		String expectedResults3 = "Nothing to redo.";
+		String expectedResults4 = "Slot #5 is created and added.";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 4].trim());
+		assertEquals(expectedResults2, output[output.length - 3].trim());
+		assertEquals(expectedResults3, output[output.length - 2].trim());
+		assertEquals(expectedResults4, output[output.length - 1].trim());
 	}
 	
 	@Test
-	void testAddNewSlot9() {
+	void testAddNewSlot9 () {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	      
@@ -204,11 +220,56 @@ public class AddNewSlot {
 	    RecordedCommand.undoOneCommand();
 	    RecordedCommand.redoOneCommand();
 	    
-	    String cmdLine3 = "addItem|5";
+	    String cmdLine3 = "addSlot|5";
 	    String [] cmdParts3 = cmdLine3.split("\\|");
 	    (new CmdAddItem()).execute(cmdParts3);
 	    
-	    //String msg = "Checking redo command for CmdAddItem when there is no addition of items between undo and redo";
-	    assertEquals("Sorry. Currently there is no available slots. The item is added to Queue.", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
+	    String expectedResults1 = "Insufficient command arguments!";
+		String expectedResults2 = "Slot #5 is removed.";
+		String expectedResults3 = "Slot #5 is created and added.";
+		String expectedResults4 = "Insufficient command arguments!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 4].trim());
+		assertEquals(expectedResults2, output[output.length - 3].trim());
+		assertEquals(expectedResults3, output[output.length - 2].trim());
+		assertEquals(expectedResults4, output[output.length - 1].trim());
 	}
-}
+
+
+	@Test
+	void testAddNewSlot10() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	      
+	    String cmdLine2 = "addSlot|e";
+	    String [] cmdParts2 = cmdLine2.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts2);
+	    
+	    String expectedResults1 = "Wrong Input Format!";
+		
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 1].trim());
+		
+	}
+	
+	@Test
+	void testAddNewSlot11() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	      
+	    String cmdLine = "startNewDay|Oct 15, 2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdSetDate()).execute(cmdParts);
+	    (new CmdDeliverExpiredItem()).execute(cmdParts);
+	    
+	    String cmdLine2 = "addSlot|3";
+	    String [] cmdParts2 = cmdLine2.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts2);
+	    
+	    String expectedResults1 = "The date should have format of \\\"dd-mmName-yyyy\\\" e.g 12-Oct-2020.";
+	    String expectedResults2 =  "Slot #6 is created and added.";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+		
+	}
