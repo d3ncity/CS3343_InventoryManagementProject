@@ -49,6 +49,12 @@ public class Warehouse implements Functions{
 		return true;
 	}
 	
+	private boolean automation = true;
+	public void setAutomation(boolean status) {
+		this.automation = status;
+	}
+	public boolean getAutomation() {return this.automation;}
+	
 	/*
 	 * Methods for ID
 	 * 1. getTotalNoOfItems
@@ -195,7 +201,7 @@ public class Warehouse implements Functions{
 			added = false;
 		}
 		
-		if(warehouseHalfFull())
+		if(warehouseHalfFull() && getAutomation())
 			optimize();
 	}
 	

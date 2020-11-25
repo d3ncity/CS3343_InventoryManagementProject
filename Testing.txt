@@ -1,6 +1,6 @@
 startNewDay|13-Oct-2020
-addSlot|2
-addSlot|3
-addSlot|4
+addSlot|5
+addSlot|5
+addItem|2|
 addItem|3|14-Oct-2020
 listSlotByID|2
