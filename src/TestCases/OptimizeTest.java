@@ -1,6 +1,3 @@
-/**
- * 
- */
 package TestCases;
 
 import static org.junit.Assert.assertEquals;
@@ -330,6 +327,149 @@ class OptimizeTest {
 		assertEquals(expectedResults2, output[output.length - 2].trim());
 		assertEquals(expectedResults3, output[output.length - 1].trim());
 	}
+	
+	@Test
+	void testOptimize12() throws ExInsufficientArguments {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|5";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|5";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Insufficient command arguments!";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	
+	@Test
+	void testOptimize13() throws ExInvalidDate {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1|13-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Error. The date is before or equals to system date.";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	@Test
+	void testOptimize14() throws ExInvalidDate {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1|12-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Error. The date is before or equals to system date.";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	@Test //Throwing an error
+	void testOptimize15() throws ExInvalidCommand {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addingSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1|12-Oct-2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Invalid Command!";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	@Test
+	void testOptimize16() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1|12 Oct, 2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "The date should have format of \\\"dd-mmName-yyyy\\\" e.g 12-Oct-2020.";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	@Test
+	void testOptimize17() throws NumberFormatException {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1e|12 Oct, 2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Wrong Input Format!";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+	
+	@Test //Throwing an error
+	void testOptimize18() throws NumberFormatException {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String cmdLine1 = "addSlot|2e";
+		String[] cmdParts1 = cmdLine1.split("\\|");
+		(new CmdAddSlot()).execute(cmdParts1);
+		String cmdLine4 = "addItem|1|12 Oct, 2020";
+		String[] cmdParts4 = cmdLine4.split("\\|");
+		(new CmdAddItem()).execute(cmdParts4);
+		String cmdLine8 = "optimize";
+		String[] cmdParts8 = cmdLine8.split("\\|");
+		(new CmdOptimize()).execute(cmdParts8);
+		String expectedResults1 = "Wrong Input Format!";
+		String expectedResults2 = "Nothing to optimize!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 2].trim());
+		assertEquals(expectedResults2, output[output.length - 1].trim());
+	}
+}
+
 
 //	
 //	@Test
@@ -536,4 +676,4 @@ class OptimizeTest {
 //		assertEquals("Slot #" + slot2.getSlotID() + " is Full!", outContent.toString());
 //	}
 
-}
+//}
