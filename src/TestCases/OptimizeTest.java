@@ -395,7 +395,7 @@ class OptimizeTest {
 		System.setOut(new PrintStream(outContent));
 		String cmdLine1 = "addingSlot|2";
 		String[] cmdParts1 = cmdLine1.split("\\|");
-		(new CmdAddSlot()).execute(cmdParts1);
+		Main.acceptCmd(cmdParts1);
 		String cmdLine4 = "addItem|1|12-Oct-2020";
 		String[] cmdParts4 = cmdLine4.split("\\|");
 		(new CmdAddItem()).execute(cmdParts4);
@@ -403,10 +403,12 @@ class OptimizeTest {
 		String[] cmdParts8 = cmdLine8.split("\\|");
 		(new CmdOptimize()).execute(cmdParts8);
 		String expectedResults1 = "Invalid Command!";
-		String expectedResults2 = "Nothing to optimize!";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
 		String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length - 2].trim());
-		assertEquals(expectedResults2, output[output.length - 1].trim());
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
 	}
 	
 	@Test
@@ -463,217 +465,11 @@ class OptimizeTest {
 		String[] cmdParts8 = cmdLine8.split("\\|");
 		(new CmdOptimize()).execute(cmdParts8);
 		String expectedResults1 = "Wrong Input Format!";
-		String expectedResults2 = "Nothing to optimize!";
+		String expectedResults2 = "Error. No slot has been created yet!";
+		String expectedResults3 = "Nothing to optimize!";
 		String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length - 2].trim());
-		assertEquals(expectedResults2, output[output.length - 1].trim());
+		assertEquals(expectedResults1, output[output.length - 3].trim());
+		assertEquals(expectedResults2, output[output.length - 2].trim());
+		assertEquals(expectedResults3, output[output.length - 1].trim());
 	}
 }
-
-
-//	
-//	@Test
-//	void testOptimize2()
-//	{	
-//		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(outContent));
-//		String cmdLine1 = "addSlot|5";
-//	    String [] cmdParts1 = cmdLine1.split("\\|");
-//	    (new CmdAddSlot()).execute(cmdParts1);
-//	    String cmdLine4 = "addItem|5|14-Oct-2020";
-//	    String [] cmdParts4 = cmdLine4.split("\\|");
-//	    (new CmdAddItem()).execute(cmdParts4);
-//	    
-//	    String cmdLine6 = "optimize";
-//	    String [] cmdParts6 = cmdLine6.split("\\|");
-//	    (new Optimize()).findOnePerfectFit(itemArray, cmdLine);
-//	    
-//	    String expectedResults2 = "2. Dimensions for Item #1 is 2, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
-//	    String[] output = outContent.toString().split("\n");
-//	    assertEquals(expectedResults2, output[output.length-1].trim());
-//	}
-//	@Test
-//	void testOptimize1() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(true, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize2() throws ExWrongDateFormat {
-//		Item is = new Item(0, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(1);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(false, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize3() throws ExWrongDateFormat {
-//		Item is = new Item(-1, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(false, opt.getFound());
-//	}
-//	
-//	//This test case output must be false
-//	@Test
-//	void testOptimize4() throws ExWrongDateFormat {
-//		Item is = new Item(-1, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(-1);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(false, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize5() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(10);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(false, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize6() throws ExWrongDateFormat {
-//		Item is = new Item(10, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(0);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(false, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize7() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(true, opt.getFound());
-//	}
-//	/*
-//	@Test
-//	void testOptimize8() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(true, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize9() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(true, opt.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize10() throws ExWrongDateFormat {
-//		Item is = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Slot ss = new Slot(5);
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is);
-//		Optimize opt = new Optimize();
-//	    opt.findOnePerfectFit(itemArray, ss);
-//	    assertEquals(true, opt.getFound());
-//	}
-//	//
-//*/
-//	//test cases for findOnePerfectSubsets
-//	@Test
-//	void testOptimize8() throws ExWrongDateFormat {
-//		Warehouse wh =  Warehouse.getInstance();
-//		ArrayList<Slot> slots = new ArrayList<>();
-//		Slot ss = new Slot(7);
-//		slots.add(ss);
-//		//wh.setSlots(slots);
-//		Item is1 = new Item(5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Item is2 = new Item(2, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is1);
-//		itemArray.add(is2);
-//		Optimize op = new Optimize();
-//		op.findOnePerfectSubsets(itemArray, itemArray.size(), 6, ss);
-//		assertEquals(true, op.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimize9() throws ExWrongDateFormat {
-//		Slot ss = new Slot(4);
-//		Item is1 = new Item(-5, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Item is2 = new Item(2, new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		ArrayList<Item> itemArray = new ArrayList<Item>();
-//		itemArray.add(is1);
-//		itemArray.add(is2);
-//		Optimize op = new Optimize();
-//		op.findOnePerfectSubsets(itemArray, itemArray.size(), 3, ss);
-//		assertEquals(true, op.getFound());
-//	}
-//	
-//	@Test
-//	void testOptimizeBuffer1() throws ExWrongDateFormat {
-//		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//	    System.setOut(new PrintStream(outContent));
-//		Warehouse wh = Warehouse.getInstance();
-//		Optimize op = new Optimize();
-//		Slot slot2 = new Slot(7);
-//		
-//		Item item1 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Item item2 = new Item(4,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
-//		
-//		wh.optimize();
-//		assertEquals("The system is optimized.", outContent.toString());
-//	}
-//	
-//	//print all items
-//	@Test
-//	void testPrint1() throws ExWrongDateFormat {
-//		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//	    System.setOut(new PrintStream(outContent));
-//	    
-//		SystemDate.createTheInstance("13-Oct-2020");
-//		Warehouse wh = Warehouse.getInstance();
-//		
-//		Slot slot2 = new Slot(7);
-//		
-//		Item item1 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-//		Item item2 = new Item(4,new Day("13-Oct-2020"),new Day("20-Nov-2020"));
-//		
-//		System.out.println("Before Optimized:");
-//		System.out.println("__________________________________________");
-////		wh.printAllSlotsDetails();
-//		//Things to discuss, when should we automatically optimized
-//		wh.optimize();
-//		System.out.println("After Optimized:");
-//		System.out.println("__________________________________________");
-////		wh.printAllSlotsDetails();
-//		assertEquals("Slot #" + slot2.getSlotID() + " is Full!", outContent.toString());
-//	}
-
-//}

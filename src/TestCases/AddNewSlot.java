@@ -273,3 +273,4 @@ public class AddNewSlot {
 		assertEquals(expectedResults2, output[output.length - 1].trim());
 		
 	}
+}
