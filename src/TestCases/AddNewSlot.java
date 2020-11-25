@@ -143,4 +143,72 @@ public class AddNewSlot {
 	    //String msg = "Checking when the size of the item is less than 1";
 	    assertEquals("Volume Out Of Range. The size can only be (1-100).", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	}	
+	
+	@Test
+	void testAddNewSlot7() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+	    String cmdLine = "startNewDay|15-Oct-2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdSetDate()).execute(cmdParts);
+	    (new CmdDeliverExpiredItem()).execute(cmdParts);
+	    
+	    String cmdLine2 = "addSlot|5";
+	    String [] cmdParts2 = cmdLine2.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts2);
+	    
+	    RecordedCommand.undoOneCommand();
+	    
+	    String cmdLine3 = "addSlot|6";
+	    String [] cmdParts3 = cmdLine3.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts3);
+	    
+	    String msg = "Checking undo command for CmdAddSlot";
+	    assertEquals("Item #6 with size(5) is added in Slot ID #5 ", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	}
+	
+	@Test
+	void testAddNewSlot8() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+	    String cmdLine = "startNewDay|15-Oct-2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdSetDate()).execute(cmdParts);
+	    (new CmdDeliverExpiredItem()).execute(cmdParts);
+	    
+	    String cmdLine2 = "addSlot|5";
+	    String [] cmdParts2 = cmdLine2.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts2);
+	    
+	    RecordedCommand.redoOneCommand();
+	    
+	    String cmdLine3 = "addSlot|6";
+	    String [] cmdParts3 = cmdLine3.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts3);
+	    
+	    String msg = "Checking redo command for CmdAddSlot";
+	    assertEquals("Item #6 with size(5) is added in Slot ID #5 ", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	}
+	
+	@Test
+	void testAddNewSlot9() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	      
+	    String cmdLine2 = "addSlot|5";
+	    String [] cmdParts2 = cmdLine2.split("\\|");
+	    (new CmdAddItem()).execute(cmdParts2);
+	    
+	    RecordedCommand.undoOneCommand();
+	    RecordedCommand.redoOneCommand();
+	    
+	    String cmdLine3 = "addItem|5";
+	    String [] cmdParts3 = cmdLine3.split("\\|");
+	    (new CmdAddItem()).execute(cmdParts3);
+	    
+	    //String msg = "Checking redo command for CmdAddItem when there is no addition of items between undo and redo";
+	    assertEquals("Sorry. Currently there is no available slots. The item is added to Queue.", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
+	}
 }
