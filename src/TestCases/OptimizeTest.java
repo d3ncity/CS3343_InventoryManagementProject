@@ -389,7 +389,7 @@ class OptimizeTest {
 		assertEquals(expectedResults2, output[output.length - 1].trim());
 	}
 	
-	@Test //Throwing an error
+	@Test
 	void testOptimize15() throws ExInvalidCommand {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -449,11 +449,11 @@ class OptimizeTest {
 		assertEquals(expectedResults2, output[output.length - 1].trim());
 	}
 	
-	@Test //Throwing an error
+	@Test
 	void testOptimize18() throws NumberFormatException {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-		String cmdLine1 = "addSlot|2e";
+		String cmdLine1 = "addSlot|e";
 		String[] cmdParts1 = cmdLine1.split("\\|");
 		(new CmdAddSlot()).execute(cmdParts1);
 		String cmdLine4 = "addItem|1|12 Oct, 2020";
