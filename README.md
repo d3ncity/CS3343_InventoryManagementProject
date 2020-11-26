@@ -5,7 +5,7 @@
 - Periodically, the Warehouse will optimize its storage slots by rearranging the items in the best possible manner
 ## Please note that in addition to the JRE System Library, the following JAR files / Libraries were used:
 - JUnit 5 (for testing)
-- Log4j and Jcabi (for logging)
+- Log4j and Jcabi and the Eclipse Plugin ANSI Escape in Console (for logging)
 ## List of Contributors: 
 - Denny
 - Daniyar
