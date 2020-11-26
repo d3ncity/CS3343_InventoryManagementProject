@@ -12,8 +12,6 @@ public class CmdDeliverExpiredItem implements Command{
 	
 	@Override
 	public void execute(String[] cmdParts) {
-		
-		try {
 			day = new Day(cmdParts[1]);
 			ArrayList<Item> itemList = new ArrayList<>();
 			
@@ -31,9 +29,6 @@ public class CmdDeliverExpiredItem implements Command{
 				itemList.clear();
 			}
 			wh.optimize();
-		} catch (ExWrongDateFormat e) {
-			System.out.println(e.getMessage());
-		}
 //		addUndoCommand(this);
 //		clearRedoList();
 	}

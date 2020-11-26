@@ -55,7 +55,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts);
 	    
 	    String msg = "Checking when there is no items in the warehouse yet";
-	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("The warehouse is empty!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -63,12 +63,16 @@ class CmdListItemByIDTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
-	    String cmdLine = "listItemByID|0";
+	    String cmdLine = "addItem|3|10-Oct-2020";
 	    String [] cmdParts = cmdLine.split("\\|");
-	    (new CmdListItemByID()).execute(cmdParts);
+	    (new CmdAddItem()).execute(cmdParts);
+	    
+	    String cmdLine1 = "listItemByID|0";
+	    String [] cmdParts1 = cmdLine1.split("\\|");
+	    (new CmdListItemByID()).execute(cmdParts1);
 	    
 	    String msg = "Checking when ID is invalid";
-	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Wrong ID number! It should be > 0", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
@@ -81,7 +85,7 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts);
 	    
 	    String msg = "Checking when ID is invalid";
-	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Wrong ID number! It should be > 0", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 	@Test
@@ -89,16 +93,16 @@ class CmdListItemByIDTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 	    
-	    String cmdLine = "addItem|3|10-Oct-2020";
+	    String cmdLine = "addItem|1|12-Oct-2020";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdAddItem()).execute(cmdParts);
 	 
-	    String cmdLine1 = "listItemByID|1";
+	    String cmdLine1 = "listItemByID|2";
 	    String [] cmdParts1 = cmdLine1.split("\\|");
 	    (new CmdListItemByID()).execute(cmdParts1);
 	    
 	    String msg = "Basic situation";
-	    assertEquals("Current Slot #3 ;Dimensions for Item #1 is 3; Arrival Date: 1-Oct-2020, Departure Date: 10-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("Current Slot #1 ;Dimensions for Item #2 is 1; Arrival Date: 1-Oct-2020, Departure Date: 12-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 	@Test
@@ -116,7 +120,20 @@ class CmdListItemByIDTest {
 	    (new CmdListItemByID()).execute(cmdParts1);
 	    
 	    String msg = "Checking when the item has expired delivery date";
-	    assertEquals("Error. There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	    assertEquals("There is no such item!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
+	}
+	
+	@Test
+	void testCmdListItemByID_06() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+	    String cmdLine = "listItemByID";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdListItemByID()).execute(cmdParts);
+	    
+	    String msg = "";
+	    assertEquals("Insufficient command arguments!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 
 

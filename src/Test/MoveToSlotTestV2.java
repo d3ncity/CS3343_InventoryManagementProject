@@ -12,7 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Code.CmdDeliverExpiredItem;
+import Code.CmdSetDate;
 import Code.Day;
+import Code.ExWrongDateFormat;
 import Code.Item;
 import Code.Slot;
 import Code.SystemDate;
@@ -31,67 +34,62 @@ class MoveToSlotTestV2 {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		Warehouse.getInstance().reset();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 	}
 
-	/*@Test
-	void testMoveToSlot_01() {
-		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
-		
+	@Test
+	void testMoveToSlot_01() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
+
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
-		boolean result = wh.testResult();
 		String msg = "Checking when the warehouse is completely empty";
-		assertEquals(true, result, msg);
+		assertEquals("Item #1 with size(1) is added in Slot ID #1 ; Delivery Date: 20-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	
 	@Test
-	void testMoveToSlot_02() {
-		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
-		
+	void testMoveToSlot_02() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
+
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item4 = new Item(4,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item5 = new Item(5,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item newItem = new Item(2,new Day("15-Oct-2020"),new Day("27-Oct-2020"));
-		
-		boolean result = wh.testResult();
+
 		String msg = "Checking when the warehouse is completely full";
-		assertEquals(false, result, msg);
+		assertEquals("Sorry. Currently there is no available slots. The item is added to Queue.", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
-	void testMoveToSlot_03() {
-		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
-		
+	void testMoveToSlot_03() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
+
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
@@ -100,72 +98,74 @@ class MoveToSlotTestV2 {
 		
 		Item newItem = new Item(2,new Day("15-Oct-2020"),new Day("27-Oct-2020"));
 
-		boolean result = wh.testResult();
 		String msg = "Checking when the slot has an item, but there are enough freeVolume for another item";
-		assertEquals(true, result, msg);
+		assertEquals("Item #6 with size(2) is added in Slot ID #5 ; Delivery Date: 27-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
-	void testMoveToSlot_04() {
-		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+	void testMoveToSlot_04() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("19-Oct-2020"));
 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item4 = new Item(4,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item5 = new Item(5,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
+		
+		String cmdLine = "startNewDay|19-Oct-2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdSetDate()).execute(cmdParts);
+	    (new CmdDeliverExpiredItem()).execute(cmdParts);
 		
 		Item newItem = new Item(2,new Day("19-Oct-2020"),new Day("27-Oct-2020"));
 
-		boolean result = wh.testResult();
 		String msg = "Checking when the item expires in the same day as new item comes";
-		assertEquals(true, result, msg);
+		assertEquals("Item #6 with size(2) is added in Slot ID #2 ; Delivery Date: 27-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
-	void testMoveToSlot_05() {
-		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
-		
+	void testMoveToSlot_05() throws ExWrongDateFormat {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
+
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("19-Oct-2020"));
 		Item item3 = new Item(3,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item4 = new Item(4,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item5 = new Item(5,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		
+		String cmdLine = "startNewDay|21-Oct-2020";
+	    String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdSetDate()).execute(cmdParts);
+	    (new CmdDeliverExpiredItem()).execute(cmdParts);
+		
 		Item newItem = new Item(2,new Day("21-Oct-2020"),new Day("27-Oct-2020"));
 
-		boolean result = wh.testResult();
 		String msg = "Checking when all items have expired and the warehouse is empty";
-		assertEquals(true, result, msg);
+		assertEquals("Item #6 with size(2) is added in Slot ID #2 ; Delivery Date: 27-Oct-2020", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1), msg);
 	}
 	
 	@Test
-	void testMoveToSlot_06() {
+	void testMoveToSlot_06() throws ExWrongDateFormat {
 		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
@@ -180,17 +180,14 @@ class MoveToSlotTestV2 {
 		assertEquals(false, result, msg);
 	}
 	
-	@Test
-	void testMoveToSlot_07() {
+	/*@Test
+	void testMoveToSlot_07() throws ExWrongDateFormat {
 		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
@@ -204,16 +201,13 @@ class MoveToSlotTestV2 {
 	}
 	
 	@Test
-	void testMoveToSlot_08() {
+	void testMoveToSlot_08() throws ExWrongDateFormat {
 		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
@@ -223,19 +217,16 @@ class MoveToSlotTestV2 {
 		boolean result = wh.testResult();
 		String msg = "Checking when the departure date is smaller than the arrival date";
 		assertEquals(false, result, msg);
-	}
+	}*/
 	
 	@Test
-	void testMoveToSlot_09() {
+	void testMoveToSlot_09() throws ExWrongDateFormat {
 		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
@@ -247,17 +238,14 @@ class MoveToSlotTestV2 {
 		assertEquals(false, result, msg);
 	}
 	
-	@Test
-	void testMoveToSlot_10() {
+	/*@Test
+	void testMoveToSlot_10() throws ExWrongDateFormat {
 		Warehouse wh =  Warehouse.getInstance();
-		ArrayList<Slot> slots = new ArrayList<>();
-		slots.add(new Slot(1));
-		slots.add(new Slot(2));
-		slots.add(new Slot(3));
-		slots.add(new Slot(4));
-		slots.add(new Slot(5));
-		
-		wh.setSlots(slots);
+		Slot slot1 = new Slot(1);
+		Slot slot2 = new Slot(2);
+		Slot slot3 = new Slot(3);
+		Slot slot4 = new Slot(4);
+		Slot slot5 = new Slot(5);
 		
 		Item item1 = new Item(1,new Day("13-Oct-2020"),new Day("20-Oct-2020"));
 		Item item2 = new Item(2,new Day("13-Oct-2020"),new Day("20-Oct-2020"));

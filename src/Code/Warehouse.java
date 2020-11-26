@@ -2,6 +2,7 @@ package Code;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 //import java.util.Collections;
@@ -208,7 +209,20 @@ public class Warehouse implements Functions{
 	//Moving item from the queue to the slot
 	public void moveQueueItemToSlot() throws ExEmptyQueue{
 		//If the queue is empty
+		
 		if(queueList.size()==0) {throw new ExEmptyQueue();}
+		
+		Iterator<Item> itr = queueList.iterator();
+		
+		while (itr.hasNext()) {
+			Item item = itr.next(); 
+			if (item.getDepartureDate().compareTo(SystemDate.getInstance()) <= 0) { 
+				itr.remove(); 
+			} 
+		}
+		
+		if(queueList.size()==0) {throw new ExEmptyQueue();}
+		
 		Item oldQueueItem = queueList.get(queueList.size()-1);
 		moveToSlot(oldQueueItem);
 		queueList.remove(queueList.size()-1);

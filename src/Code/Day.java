@@ -14,7 +14,7 @@ public class Day implements Cloneable,Comparable<Day>{
 		this.month=m;
 		this.day=d;		
 	}
-	public Day(String sDay) throws ExWrongDateFormat {
+	public Day(String sDay) {
 		this.set(sDay);
 	}
 
@@ -27,16 +27,20 @@ public class Day implements Cloneable,Comparable<Day>{
 		return day;
 	}
 	
-	public void set(String sDay) throws ExWrongDateFormat //Set year,month,day based on a string like 01-Mar-2020
+	public void set(String sDay) //Set year,month,day based on a string like 01-Mar-2020
 	{
-		String[] sDayParts = sDay.split("-");
-		if (sDayParts.length != 3) {
-			throw new ExWrongDateFormat();
-		}
+		try {
+			String[] sDayParts = sDay.split("-");
+			if (sDayParts.length != 3) {
+				throw new ExWrongDateFormat();
+			}
 		
-		this.day = Integer.parseInt(sDayParts[0]); //Apply Integer.parseInt for sDayParts[0];
-		this.year = Integer.parseInt(sDayParts[2]);
-		this.month = MonthNames.indexOf(sDayParts[1])/3+1;
+			this.day = Integer.parseInt(sDayParts[0]); //Apply Integer.parseInt for sDayParts[0];
+			this.year = Integer.parseInt(sDayParts[2]);
+			this.month = MonthNames.indexOf(sDayParts[1])/3+1;
+		}	catch (ExWrongDateFormat e) {
+			System.out.println("Wrong Input Format!");
+		}
 	}
 	
 	// check if a given year is a leap year
@@ -70,6 +74,25 @@ public class Day implements Cloneable,Comparable<Day>{
 		}
 		return false;
 	}
+	
+	public boolean isValid()
+	{
+		if (month<1 || month>12 || day<1) return false;
+		switch(month){
+			case 1: case 3: case 5: case 7:
+			case 8: case 10: case 12:
+					 return day<=31; 
+			case 4: case 6: case 9: case 11:
+					 return day<=30; 
+			case 2:
+					 if (isLeapYear(year))
+						 return day<=29; 
+					 else
+						 return day<=28; 
+		}
+		return false;
+	}
+	
 	
 	public int daysInMonth() {
 		switch(month){
