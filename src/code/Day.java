@@ -89,19 +89,7 @@ public class Day implements Cloneable, Comparable<Day> {
 		}
 		return false;
 	}
-
-//	public int daysInMonth() {
-//		switch (month) {
-//		case 1:	case 3:	case 5:	case 7:	case 8:	case 10: case 12: 
-//			return 31;
-//		case 4:	case 6:	case 9:	case 11:
-//			return 30;
-//		case 2:
-//			return 29;
-//		}
-//		return -1;
-//	}
-
+	
 	@Override
 	public int compareTo(Day another) {
 		int self = this.getAsInt();
@@ -122,6 +110,24 @@ public class Day implements Cloneable, Comparable<Day> {
 		self += this.day;
 		return self;
 	}
+
+	// Return a string for the day like dd MMM yyyy
+	@Override
+	public String toString() {
+		return day + "-" + MonthNames.substring((month - 1) * 3, (month - 1) * 3 + 3) + "-" + year;
+	}
+
+//	public int daysInMonth() {
+//		switch (month) {
+//		case 1:	case 3:	case 5:	case 7:	case 8:	case 10: case 12: 
+//			return 31;
+//		case 4:	case 6:	case 9:	case 11:
+//			return 30;
+//		case 2:
+//			return 29;
+//		}
+//		return -1;
+//	}
 
 //	public boolean more(Day d) {
 //		if (this.getAsInt() >= d.getAsInt())
@@ -145,20 +151,15 @@ public class Day implements Cloneable, Comparable<Day> {
 //		return flag;
 //	}
 
-	// Return a string for the day like dd MMM yyyy
-	@Override
-	public String toString() {
-		return day + "-" + MonthNames.substring((month - 1) * 3, (month - 1) * 3 + 3) + "-" + year;
-	}
 
-	@Override
-	public Day clone() {
-		Day copy = null;
-		try {
-			copy = (Day) super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return copy;
-	}
+//	@Override
+//	public Day clone() {
+//		Day copy = null;
+//		try {
+//			copy = (Day) super.clone();
+//		} catch (CloneNotSupportedException e) {
+//			e.printStackTrace();
+//		}
+//		return copy;
+//	}
 }

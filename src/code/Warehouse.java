@@ -32,8 +32,9 @@ public class Warehouse implements Functions{
 	
 	/*
 	 * Methods for Warehouse
-	 * 1. WarehouseHalfFull()
-	 * 2. WarehouseEmpty()
+	 * 1. warehouseHalfFull()
+	 * 2. warehouseEmpty()
+	 * 3. warehouseReset()
 	 */
 	public boolean warehouseHalfFull() {
 		int totalVolume = 0;

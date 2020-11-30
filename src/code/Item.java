@@ -1,6 +1,6 @@
 package code;
 
-public class Item implements Comparable<Item>{
+public class Item implements Comparable<Item> {
 
 	//Instance Field
 	private int dimensions;
