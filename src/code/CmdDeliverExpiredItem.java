@@ -28,6 +28,7 @@ public class CmdDeliverExpiredItem implements Command{
 					s.removeItem(i);
 					deliveredList.add(i);
 				}
+				itemList.clear();
 			}
 			
 			for (Item i: wh.getQueue()) {
@@ -37,11 +38,11 @@ public class CmdDeliverExpiredItem implements Command{
 			}
 			for (Item i: itemList2) {
 				wh.getQueue().remove(i);
-				deliveredList.add(i);
+//				deliveredList.add(i);
 			}
-			
+			itemList2.clear();
 			CmdDeliverExpiredItem.deliveredNum = this.deliveredList.size();
-			itemList.clear();
+			
 			wh.optimize();
 		} catch (ExWrongDateFormat e) {
 			System.out.println(e.getMessage());

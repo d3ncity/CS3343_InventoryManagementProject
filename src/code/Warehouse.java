@@ -183,8 +183,6 @@ public class Warehouse implements Functions{
 		if(s != null) {
 			s.addItem(item);
 			item.setCurrentSlot(s);	
-            if (s.getFreeVolume() == 0) 
-            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
             
 			//For testing purposes
 			added = true;
@@ -251,8 +249,6 @@ public class Warehouse implements Functions{
     		
     		//Find one item that can perfectly fit the slot.
             opt.findOnePerfectFit(itemsBuffer, s);
-            if (s.getFreeVolume() == 0) 
-            	System.out.println("Slot #"+ s.getSlotID() +" is Full!");
             
             //Find multiple items which can perfectly fit the slot when combine.
             if (!opt.getFound())

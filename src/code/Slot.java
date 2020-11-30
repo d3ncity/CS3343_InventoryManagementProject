@@ -33,15 +33,13 @@ public class Slot implements Comparable<Slot> {
 	//Add item into the slot
 	public void addItem(Item item) {
 		items.add(item);
-		this.freeVolume = this.freeVolume - item.getDimensions();
+		this.freeVolume -= item.getDimensions();
 		item.setCurrentSlot(this);
-		System.out.println("Item #"+item.getItemID()+" with size("+item.getDimensions()+") is added in Slot ID #"+ 
-		item.getCurrentSlot().getSlotID()+ " ; Delivery Date: " + item.getDepartureDate());
 	}
 	
 	//Remove item from slot
 	public void removeItem(Item item) {
-		this.freeVolume+=item.getDimensions();
+		this.freeVolume += item.getDimensions(); //TAG
 		items.remove(item);
 		item.setCurrentSlot(null);		
 	}

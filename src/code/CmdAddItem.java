@@ -36,6 +36,13 @@ public class CmdAddItem extends RecordedCommand {
 			
 			item = new Item(dimension,sArrivalDate,new Day(sDepartureDate));
 			slot = item.getCurrentSlot();
+			if (slot != null) {
+				if (slot.getVolume() == 0)
+		        	System.out.println("Slot #"+ slot.getSlotID() +" is Full!");
+				System.out.println("Item #"+item.getItemID()+" with size("+item.getDimensions()+") is added in Slot ID #"+ 
+						item.getCurrentSlot().getSlotID()+ " ; Delivery Date: " + item.getDepartureDate());
+			}
+				
 			addUndoCommand(this);
 			clearRedoList();
 			
@@ -57,12 +64,22 @@ public class CmdAddItem extends RecordedCommand {
 	@Override
 	public void undoMe() {
 		slot.removeItem(item);
+		if (item.getCurrentSlot() == null) {
+			System.out.println("Item #"+item.getItemID()+" with size("+item.getDimensions()+") is removed from Slot ID #"+ 
+					slot.getSlotID()+ " ; Delivery Date: " + item.getDepartureDate());
+		}
 		addRedoCommand(this);
 	}
 
 	@Override
 	public void redoMe() {
 		slot.addItem(item);
+		if (item.getCurrentSlot() != null) {
+			if (slot.getVolume() == 0)
+	        	System.out.println("Slot #"+ slot.getSlotID() +" is Full!");
+			System.out.println("Item #"+item.getItemID()+" with size("+item.getDimensions()+") is added in Slot ID #"+ 
+					item.getCurrentSlot().getSlotID()+ " ; Delivery Date: " + item.getDepartureDate());
+		}
 		addUndoCommand(this);
 	}
 
