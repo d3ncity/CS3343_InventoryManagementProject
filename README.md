@@ -54,6 +54,8 @@ The following list is represented in the following format:
 #### Version 1.0
 - Denial of negative volume valued items.
 - Terminate the execution of items that have the delivery date earlier than the arrival date.
+- Handling the exception when slot value=null
+- Handling the IndexOutOfBounds Exception
 #### Version 2.0
 - Process items that should be delivered up to this date.
 - Necessity to check if the given date is valid or not (54-Oct-2014 or 29-Feb-2021).  
@@ -61,6 +63,8 @@ The following list is represented in the following format:
 - Lack of the method to check for the expiration of items in the queue.
 - Exception Handling needed for the CmdListItemByID.
 - Items added from queue to the warehouse is limited to the number of items left instead of limiting it to the volume released by those items.
+- Exception Handling needed for the Optimize.
+- Exception Handling needed for CmdListWarehouse
 
 ## List of Contributors:
 - Denny
