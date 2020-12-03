@@ -112,6 +112,8 @@ public class SystemInputCmd extends InputCommand{
 				}
 				
 			} while(cmdNumber != 13);
+			
+			System.out.println("System Input TERMINATED!");
 	}
 	
 

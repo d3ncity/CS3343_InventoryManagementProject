@@ -1,71 +1,68 @@
 package code;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
-
-//import java.io.File;
-//import java.io.FileNotFoundException;
 
 public class WarehouseSystem {
 
-	static Logger logger = Logger.getLogger(Main.class);
-	
+	// Log4J - Program Log Declaration
+	static Logger logger = Logger.getLogger(WarehouseSystem.class);
+
+	// Method #1 - System Input Method
 	public void systemInput(Scanner in) {
-		SystemInputCmd sInput = new SystemInputCmd();
-		sInput.execute(in);
+		(new SystemInputCmd()).execute(in);
 	}
+
+	// Method #2 - File Input Method
 	public void fileInput(Scanner in, String filePath) {
-		FileInputCmd fInput = new FileInputCmd();
-		fInput.execute(in, filePath);
+		(new FileInputCmd()).execute(in, filePath);
+	}
+
+	// Method #3 - Print Instructions
+	public void printInstructions() {
+		System.out.print("---------------------------------------\n" + "Warehouse Management System Menu!\n"
+				+ "Function (1): Command from System Input (For daily use)\n"
+				+ "Function (2): Command from File Input (For predefined command)\n"
+				+ "Type \"-1\" if you want to terminate the program.\n" + "Please select your function (1 / 2)? ");
 	}
 
 	public void execute() throws NumberFormatException, InterruptedException {
-		
-		logger.info("Warehouse Management System Program START....");
 
+		// local variable for input method selection
 		int functionInput = 0;
 		String filePath = null;
 
+		// Accept User Input
 		Scanner command = new Scanner(System.in);
-		Scanner in = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 
-		do {
-			System.out.print("---------------------------------------\n" + "Warehouse Management System Menu!\n"
-					+ "Function (1): Command from System Input (For daily use)\n"
-					+ "Function (2): Command from File Input (For predefined command)\n"
-					+ "Type \"-1\" if you want to terminate the program.\n" + "Please select your function (1 / 2)? ");
+		do { // This flow will repeat until user choose to terminate
 
-			functionInput = in.nextInt();
+			printInstructions();
 
-//			try {
+			functionInput = command.nextInt();
 
-				System.out.print("---------------------------------------\n");
-				switch (functionInput) {
-					case 1:
-						systemInput(in);
-						break;
-					case 2:
-						fileInput(in, filePath);
-						break;
-					case -1:
-						break;
-					default:
-						System.out.print("Wrong Command Input! Please retype!");
-						break;
-				}
-//
-//			} catch (NoSuchElementException e) {
-//				logger.error("ExNoSuchElement: No command is found!");
-//				System.out.println("No command is found!");
-//			}
+			System.out.print("---------------------------------------\n");
+
+			// Switch to different input methods
+			switch (functionInput) {
+			case 1:
+				systemInput(input);
+				break;
+			case 2:
+				fileInput(input, filePath);
+				break;
+			case -1:
+				break;
+			default:
+				System.out.println("Wrong Command Input! Please retype!");
+				break;
+			}
+
 		} while (functionInput != -1);
-		in.close();
+		input.close();
 		command.close();
-		System.out.println("Warehouse / Inventory Manager Program END. Thank you for using our program.");
-		logger.info("Warehouse / Inventory Manager Program END. Thank you for using our program.");
-		TimeUnit.SECONDS.sleep(5);
-//		System.exit(0);
+		System.out.println("Warehouse System Terminated!");
+		logger.info("Warehouse System Terminated!");
 	}
 }

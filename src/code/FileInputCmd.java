@@ -12,7 +12,6 @@ public class FileInputCmd extends InputCommand{
 	private static boolean fileFound = false;
 	
 	public void execute(Scanner in, String filepath) {
-//		Scanner in = new Scanner (System.in);
 		logger.info("File Input Command Executed");
 		fileFound = false;
 		
@@ -71,5 +70,6 @@ public class FileInputCmd extends InputCommand{
 					inFile.close();
 			}
 		}
+		System.out.println("File Input TERMINATED!");
 	}
 }
