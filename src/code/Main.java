@@ -25,7 +25,7 @@ public class Main {
 					+ "Function (2): Command from File Input (For predefined command)\n"
 					+ "Type \"-1\" if you want to terminate the program.\n" + "Please select your function (1 / 2)? ");
 
-			functionInput = command.nextInt();
+			functionInput = Integer.parseInt(command.nextLine());
 
 			try {
 

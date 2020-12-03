@@ -11,6 +11,7 @@ public class CmdOptimize implements Command {
 				throw new ExWarehouseEmpty();
 			
 			wh.optimize();
+			System.out.println("Manually Optimized!");
 			
 		} catch (ExWarehouseEmpty e) {
 			System.out.println(e.getMessage());

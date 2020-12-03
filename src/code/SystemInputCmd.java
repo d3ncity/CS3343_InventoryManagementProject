@@ -27,8 +27,6 @@ public class SystemInputCmd extends InputCommand{
 				this.addSlot(in);
 			}
 
-			
-			
 			do {
 				
 				try {
