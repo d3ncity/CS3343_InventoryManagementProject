@@ -22,6 +22,7 @@ public class TestWarehouseSystem {
 	
 	@Before
 	public void setUp() throws Exception {
+		Warehouse.getInstance().warehouseReset();
 		System.setOut(new PrintStream(outContent));
 	}
 

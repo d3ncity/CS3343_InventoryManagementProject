@@ -20,6 +20,7 @@ import code.*;
 
 public class testCmdListWarehouse {
 	
+	public ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;
 
 	@BeforeAll
@@ -35,6 +36,7 @@ public class testCmdListWarehouse {
 	@BeforeEach
 	void setUp() throws Exception {
 		Warehouse.getInstance().warehouseReset();
+		System.setOut(new PrintStream(outContent));
 	}
 	
 	@AfterEach
@@ -42,16 +44,25 @@ public class testCmdListWarehouse {
 		System.setOut(stdOut);
 	}
 	
+	public void addSlot(String cmdLine) {
+		String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts);
+	}
+	
+	public void addItem(String cmdLine) {
+		String[] cmdParts = cmdLine.split("\\|");
+		(new CmdAddItem()).execute(cmdParts);
+	}
+	public void listWarehouse() {
+		String cmdLine = "listWarehouse";
+		String[] cmdParts = cmdLine.split("\\|");
+		(new CmdListWarehouse()).execute(cmdParts);
+	}
+	
 	@Test
 	void testListWarehouse1 () {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|2";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine6 = "listWarehouse";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-		(new CmdListWarehouse()).execute(cmdParts6);
+	    addSlot("addSlot|2");
+	    listWarehouse();
 	    String expectedResults = "Slot #1 is empty, volume is 2";
 		String[] output = outContent.toString().split("\n");
 		assertEquals(expectedResults, output[output.length-2].trim());
@@ -59,17 +70,9 @@ public class testCmdListWarehouse {
 	
 	@Test
 	void testListWarehouse2 () {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|2";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addItem|1|14-Oct-2020";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts2);
-	    String cmdLine6 = "listWarehouse";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-		(new CmdListWarehouse()).execute(cmdParts6);
+		addSlot("addSlot|2");
+	    addItem("addItem|1|14-Oct-2020");
+	    listWarehouse();
 	    String expectedResults1 = "Slot #1, volume is 2, free volume is 1";
 	    String expectedResults2 = "1. Dimensions for Item #1 is 1, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
 	    String[] output = outContent.toString().split("\n");
@@ -79,17 +82,9 @@ public class testCmdListWarehouse {
 	
 	@Test
 	void testListWarehouse3 () {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
-	    String cmdLine1 = "addSlot|1";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addItem|1|14-Oct-2020";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts2);
-	    String cmdLine6 = "listWarehouse";
-	    String [] cmdParts6 = cmdLine6.split("\\|");
-		(new CmdListWarehouse()).execute(cmdParts6);
+		addSlot("addSlot|1");
+	    addItem("addItem|1|14-Oct-2020");
+	    listWarehouse();
 	    String expectedResults1 = "Slot #1, volume is 1, free volume is 0";
 	    String expectedResults2 = "1. Dimensions for Item #1 is 1, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
 		String[] output = outContent.toString().split("\n");

@@ -6,38 +6,50 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import code.*;
 
-//import code.CmdAddItem;
-//import code.CmdAddSlot;
-//import code.CmdOptimize;
-//import code.ExInsufficientArguments;
-//import code.ExInvalidCommand;
-//import code.ExWrongDateFormat;
-//import Code.Main;
-//import Code.SystemDate;
-//import Code.Warehouse;
-
 public class TestManuallyOptimize {
 	
+	public ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;
+	
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		SystemDate.createTheInstance("13-Oct-2020");
+	}
+	
+	@BeforeEach
+	void setUp() throws Exception {
+		System.setOut(new PrintStream(outContent));
+	}
 	
 	@AfterEach
 	void tearDown() throws Exception {
 		System.setOut(stdOut);
 	}
+	public void addSlot(String cmdLine) {
+		String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts);
+	}
+	
+	public void addItem(String cmdLine) {
+		String[] cmdParts = cmdLine.split("\\|");
+		(new CmdAddItem()).execute(cmdParts);
+	}
+	public void optimize() {
+		String cmdLine = "optimize";
+		String[] cmdParts = cmdLine.split("\\|");
+		(new CmdOptimize()).execute(cmdParts);
+	}
 	
 	
 	@Test //CmdOptimize could not be checked because it is not printing anything out
 	void testManuallyOptimize1() throws ExWrongDateFormat {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
-	    String cmdLine = "optimize";
-	    String [] cmdParts = cmdLine.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts);
+	    optimize();
 	    System.out.println(outContent.toString());
 	    assertEquals("Nothing to optimize!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	    
@@ -45,9 +57,6 @@ public class TestManuallyOptimize {
 	
 	@Test
 	void testManuallyOptimize2() throws ExInvalidCommand, ExWrongDateFormat {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
 	    String cmdLine = "optimizing";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdOptimize()).execute(cmdParts);
@@ -60,9 +69,6 @@ public class TestManuallyOptimize {
 	
 	@Test
 	void testManuallyOptimize3() throws ExInvalidCommand, ExWrongDateFormat, ExInsufficientArguments {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
 	    String cmdLine = "";
 	    String [] cmdParts = cmdLine.split("\\|");
 	    (new CmdOptimize()).execute(cmdParts);
@@ -75,20 +81,9 @@ public class TestManuallyOptimize {
 	
 	@Test //Error: not letting to add items to the warehouse
 	void testManuallyOptimize4() throws ExInvalidCommand, ExWrongDateFormat, ExInsufficientArguments {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(outContent));
-	    SystemDate.createTheInstance("13-Oct-2020");
-	    String cmdLine1 = "addSlot|1";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addItem|1|14-Oct-2020";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts2);
-	    String cmdLine = "optimize";	    
-	    String [] cmdParts = cmdLine.split("\\|");
-	    (new CmdOptimize()).execute(cmdParts);
-	    InputCommand inputCmd = new InputCommand();
-	    inputCmd.acceptCmd(cmdParts);
+	    addSlot("addSlot|1");
+	    addItem("addItem|1|14-Oct-2020");
+	    optimize();	    
 	    assertEquals("Manually Optimized!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	    
 	}
