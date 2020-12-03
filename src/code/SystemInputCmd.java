@@ -1,5 +1,6 @@
 package code;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
@@ -9,7 +10,7 @@ public class SystemInputCmd extends InputCommand{
 	static Logger logger = Logger.getLogger(Main.class);
 	Warehouse wh = Warehouse.getInstance();
 	
-	public void execute(Scanner in) {
+	public void execute(Scanner in) throws NoSuchElementException {
 		
 		logger.info("System Input Command Executed");
 		

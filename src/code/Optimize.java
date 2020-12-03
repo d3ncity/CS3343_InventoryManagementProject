@@ -50,7 +50,7 @@ public class Optimize {
 		
 		//Sum 0 equals true for empty set
         for (int i=0; i<length; ++i)
-            truthTable[i][0] = false;
+            truthTable[i][0] = true;
         
         if (list.get(0).getDimensions() <= sum)
             truthTable[0][list.get(0).getDimensions()] = true; 
@@ -115,7 +115,7 @@ public class Optimize {
 	
     private void rearrangeSubset(ArrayList<Item> result, ArrayList<Item> list){
     	found = true;
-    	System.out.println("Optimized!");
+//    	System.out.println("Optimized!");
     	for (int i = 0; i < result.size(); i++) {
     		this.optimizingSlot.addItem(result.get(i));
     		this.optimizedItem.add(result.get(i));

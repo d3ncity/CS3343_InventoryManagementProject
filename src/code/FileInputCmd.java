@@ -11,14 +11,18 @@ public class FileInputCmd extends InputCommand{
 	static Logger logger = Logger.getLogger(Main.class);
 	private static boolean fileFound = false;
 	
-	public void execute(Scanner in) {
+	public void execute(Scanner in, String filepath) {
 //		Scanner in = new Scanner (System.in);
 		logger.info("File Input Command Executed");
 		fileFound = false;
 		
 		while (!fileFound) {
 			System.out.print("Please input the file pathname: ");
-			String filepathname = in.nextLine();
+			String filepathname = null;
+			if (filepath == null)
+				filepathname =  in.nextLine();
+			else 
+				filepathname = filepath;
 
 			Scanner inFile = null;
 			try {
