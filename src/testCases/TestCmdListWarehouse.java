@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import code.*;
 
-public class testCmdListWarehouse {
+public class TestCmdListWarehouse {
 	
 	public ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;

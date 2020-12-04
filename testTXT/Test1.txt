@@ -1,0 +1,3 @@
+startNewDay|13-Oct-2020
+
+addSlot|5

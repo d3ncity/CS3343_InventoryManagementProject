@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import code.*;
 
-public class testCmdListSlotByID {
+public class TestCmdListSlotByID {
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;
 	

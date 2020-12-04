@@ -1,13 +1,9 @@
 package testCases;
 
 import static org.junit.Assert.assertEquals;
-//import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
-//import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import code.*;
 
-class OptimizeTest {
+class TestOptimizeAlgo {
 	
 	public ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;

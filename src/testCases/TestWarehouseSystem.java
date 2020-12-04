@@ -60,7 +60,7 @@ public class TestWarehouseSystem {
 	public void testMain2() throws IOException, NumberFormatException, InterruptedException {
 		
 		class StubSystem extends WarehouseSystem{
-			public void fileInput(Scanner in, String filePath) {
+			public void fileInput(Scanner in) {
 				return;
 			}
 		}
@@ -134,16 +134,14 @@ public class TestWarehouseSystem {
 	
 	@Test
 	public void testMain6() throws IOException, NumberFormatException, InterruptedException {
-			
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
+		
 	    final InputStream original = System.in;
 	    
 	    String input = "./Testing.txt" ;
 	    InputStream in = new ByteArrayInputStream(input.getBytes());
 	    System.setIn(in);
 	    Scanner scanner = new Scanner (System.in);
-	    (new WarehouseSystem()).fileInput(scanner, null);
+	    (new WarehouseSystem()).fileInput(scanner);
 	    System.setIn(original);
 	    String expectedResults1 = "File Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");

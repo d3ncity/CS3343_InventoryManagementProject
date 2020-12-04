@@ -14,8 +14,8 @@ public class WarehouseSystem {
 	}
 
 	// Method #2 - File Input Method
-	public void fileInput(Scanner in, String filePath) {
-		(new FileInputCmd()).execute(in, filePath);
+	public void fileInput(Scanner in) {
+		(new FileInputCmd()).execute(in);
 	}
 
 	// Method #3 - Print Instructions
@@ -50,7 +50,7 @@ public class WarehouseSystem {
 				systemInput(input);
 				break;
 			case 2:
-				fileInput(input, filePath);
+				fileInput(input);
 				break;
 			case -1:
 				break;

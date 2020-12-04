@@ -87,5 +87,4 @@ public class TestManuallyOptimize {
 	    assertEquals("Manually Optimized!", outContent.toString().trim().substring(outContent.toString().trim().lastIndexOf('\n')+1));
 	    
 	}
-	
 }

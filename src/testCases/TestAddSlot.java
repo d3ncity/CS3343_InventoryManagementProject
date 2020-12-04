@@ -22,11 +22,11 @@ import org.junit.jupiter.api.Test;
 //import Code.SystemDate;
 //import Code.Warehouse;
 import code.*;
-public class AddNewSlot {
+public class TestAddSlot {
 	
 	public ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	PrintStream stdOut = System.out;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
 		SystemDate.createTheInstance("13-Oct-2020");

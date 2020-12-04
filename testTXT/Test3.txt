@@ -1,0 +1,2 @@
+startNewDay
+addSlot|5
