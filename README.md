@@ -32,7 +32,11 @@
 
 ### List of commands
 **The following list is represented in the format:-**
-> Command Name: Command with expected Arguments in expected Format 
+
+
+> Command Name: Command with expected Arguments in expected Format
+
+
 **Note: The arguments are enclosed in parenthesis here only for understanding purposes**
 1. Add Slot: addSlot|(Size)
 2. Add Item: addItem|(Size)|(DeliveryDate)
