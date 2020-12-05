@@ -31,21 +31,21 @@
 
 
 ### List of commands
-The following list is represented in the following format:
+## The following list is represented in the following format:
 (Representing number) Description [File command]
-(1) Add Slot [addSlot|(Size)]
-(2) Add Item [addItem|(Size)|(DeliveryDate)]
-(3) Manually Optimize [optimize]
-(4) Visualize [visualize]
-(5) List Slot By ID [listSlotByID|(ItemID)]
-(6) List Item By ID [listItemByID|(SlotID)]
-(7) List Warehouse Details [listWarehouse]
-(8) Undo [undo] **Note: not every command can undo**
-(9) Redo [redo] **Note: not every command can redo**
-(10) System Reset **Not available in file input method**
-(11) (For Demo) Set Date [setNewDay|(Date)]
-(12) (For Demo) Change Auto Optimization Status [changeStatus]
-(13) EXIT **Not available in file input method**
+1. Add Slot [addSlot|(Size)]
+2. Add Item [addItem|(Size)|(DeliveryDate)]
+3. Manually Optimize [optimize]
+4. Visualize [visualize]
+5. List Slot By ID [listSlotByID|(ItemID)]
+6. List Item By ID [listItemByID|(SlotID)]
+7. List Warehouse Details [listWarehouse]
+8. Undo [undo] **Note: not every command can undo**
+9. Redo [redo] **Note: not every command can redo**
+10. System Reset **Not available in file input method**
+11. (For Demo) Set Date [setNewDay|(Date)]
+12. (For Demo) Change Auto Optimization Status [changeStatus]
+13. EXIT **Not available in file input method**
 
 
 
