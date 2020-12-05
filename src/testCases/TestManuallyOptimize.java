@@ -19,6 +19,7 @@ public class TestManuallyOptimize {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		Warehouse.getInstance().warehouseReset();
 		SystemDate.createTheInstance("13-Oct-2020");
 	}
 	
