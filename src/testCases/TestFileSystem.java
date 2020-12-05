@@ -46,9 +46,6 @@ public class TestFileSystem {
 	    String expectedResults1 = "Slot #1 is created and added.";
 	    String expectedResults2 = "File Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");
-//		for (int i = 0; i < output.length; i++) {
-//			stdOut.print(output[i]);
-//		}
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
 	}
@@ -65,9 +62,6 @@ public class TestFileSystem {
 	    String expectedResults1 = "System Date has not yet been set!";
 	    String expectedResults2 = "File Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");
-		for (int i = 0; i < output.length; i++) {
-			stdOut.print(output[i]);
-		}
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
 	}
@@ -84,9 +78,6 @@ public class TestFileSystem {
 	    String expectedResults1 = "System Date has not yet been set!";
 	    String expectedResults2 = "File Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");
-		for (int i = 0; i < output.length; i++) {
-			stdOut.print(output[i]);
-		}
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
 	}
@@ -103,9 +94,6 @@ public class TestFileSystem {
 	    String expectedResults1 = "File is not Found!";
 	    String expectedResults2 = "File Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");
-		for (int i = 0; i < output.length; i++) {
-			stdOut.print(output[i]);
-		}
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
 	}

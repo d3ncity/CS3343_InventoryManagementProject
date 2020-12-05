@@ -29,9 +29,9 @@ public abstract class RecordedCommand implements Command {
 		if (redoList.isEmpty())
 			System.out.println("Nothing to redo.");
 		else redoList.remove(redoList.size()-1).redoMe();
-		
-		
 	}
+	
+	public static void clearUndoList() {undoList.clear();}
 	
 }
 

@@ -31,4 +31,9 @@ public class SystemDate extends Day {
 			systemDateSet = false;
 		}
 	}
+	
+	public static void resetTheInstance() {
+		instance = null;
+		systemDateSet = false;
+	}
 }

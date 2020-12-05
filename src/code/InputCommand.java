@@ -44,8 +44,8 @@ public class InputCommand {
 				RecordedCommand.undoOneCommand();
 			else if (cmdParts[0].equals("redo"))
 				RecordedCommand.redoOneCommand();
-			else if (cmdParts[0].equals("EXIT"))
-				return;
+//			else if (cmdParts[0].equals("EXIT"))
+//				return;
 			else {
 				// Logging
 				Exception e = new ExInvalidCommand();

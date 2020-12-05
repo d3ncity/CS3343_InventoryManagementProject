@@ -22,6 +22,7 @@ public class SystemInputCmd extends InputCommand{
 			} 
 	
 			int cmdNumber = 0;
+			String cmdLine = null;
 			
 			if (Warehouse.getInstance().getSlotList().isEmpty()) {
 				System.out.print("Please set up the first slot\n");
@@ -51,7 +52,8 @@ public class SystemInputCmd extends InputCommand{
 					
 					System.out.print("Type command (1 - 13): > ");
 					// Trim leading spaces
-					cmdNumber = in.nextInt();
+					cmdLine = in.next();
+					cmdNumber = Integer.parseInt(cmdLine);
 					String[] cmd = {"cmd"};
 					System.out.print("---------------------------------------\n");
 					
@@ -73,11 +75,11 @@ public class SystemInputCmd extends InputCommand{
 						break;
 					case 5:
 						cmd[0] = "listSlotByID";
-						this.noArgumentFunctions(cmd);
+						this.listSlotByID(in);
 						break;
 					case 6:
 						cmd[0] = "listItemByID";
-						this.noArgumentFunctions(cmd);
+						this.listItemByID(in);
 						break;
 					case 7:
 						cmd[0] = "listWarehouse";
@@ -117,7 +119,6 @@ public class SystemInputCmd extends InputCommand{
 	}
 	
 
-
 	private void addSlot(Scanner in) {
 		System.out.print("Size of the slot:\n> ");
 		String size = in.next();
@@ -142,6 +143,21 @@ public class SystemInputCmd extends InputCommand{
 		super.acceptCmd(cmdParts);
 	}
 	
+	private void listSlotByID(Scanner in) {
+		System.out.print("Please input the slot ID:\n> ");
+		String iD= in.next();
+		String[] cmdParts = {"listSlotByID", iD};
+		super.acceptCmd(cmdParts);
+	}
+	
+	private void listItemByID(Scanner in) {
+		System.out.print("Please input the item ID:\n> ");
+		String iD= in.next();
+		String[] cmdParts = {"listItemByID", iD};
+		super.acceptCmd(cmdParts);
+	}
+
+	
 	private void noArgumentFunctions(String[] cmdParts) {
 		super.acceptCmd(cmdParts);
 	}
@@ -162,7 +178,7 @@ public class SystemInputCmd extends InputCommand{
 		if (SystemDate.getSystemDateSet()) {
 			return SystemDate.getInstance().toString();
 		} else {
-			return "Nil";
+			return "NIL";
 		}
 	}
 	

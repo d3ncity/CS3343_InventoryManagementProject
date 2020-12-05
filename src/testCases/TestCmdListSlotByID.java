@@ -22,7 +22,6 @@ public class TestCmdListSlotByID {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
-		SystemDate.createTheInstance("13-Oct-2020");
 	}
 
 	@AfterAll
@@ -33,6 +32,7 @@ public class TestCmdListSlotByID {
 	@BeforeEach
 	void setUp() throws Exception {
 		Warehouse.getInstance().warehouseReset();
+		SystemDate.createTheInstance("13-Oct-2020");
 		System.setOut(new PrintStream(outContent));
 	}
 	
@@ -41,28 +41,85 @@ public class TestCmdListSlotByID {
 		System.setOut(stdOut);
 	}
 	
+	public void addSlot(String cmdLine) {
+		String [] cmdParts = cmdLine.split("\\|");
+	    (new CmdAddSlot()).execute(cmdParts);
+	}
+	
+	public void addItem(String cmdLine) {
+		String[] cmdParts = cmdLine.split("\\|");
+		(new CmdAddItem()).execute(cmdParts);
+	}
+	
 	@Test
 	void testFindSlotByID_1 () {
-	    String cmdLine1 = "addSlot|2";
-	    String [] cmdParts1 = cmdLine1.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts1);
-	    String cmdLine2 = "addSlot|3";
-	    String [] cmdParts2 = cmdLine2.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts2);
-	    String cmdLine3 = "addSlot|4";
-	    String [] cmdParts3 = cmdLine3.split("\\|");
-	    (new CmdAddSlot()).execute(cmdParts3);
-	    String cmdLine4 = "addItem|3|14-Oct-2020";
-	    String [] cmdParts4 = cmdLine4.split("\\|");
-	    (new CmdAddItem()).execute(cmdParts4);
+	    addSlot("addSlot|2");
+	    addSlot("addSlot|3");
+	    addSlot("addSlot|4");
+	    addItem("addItem|3|14-Oct-2020");
 	    String cmdLine5 = "listSlotByID|2";
 	    String [] cmdParts5 = cmdLine5.split("\\|");
 	    (new CmdListSlotByID()).execute(cmdParts5);
 	    String expectedResults1 = "Slot #2 Details:";
 	    String expectedResults2 = "1. Dimensions for Item #1 is 3, Arrival Date: 13-Oct-2020, Departure Date: 14-Oct-2020";
 		String[] output = outContent.toString().split("\n");
+		for (int i = 0; i < output.length; i++) {
+			stdOut.print(output[i]);
+		}
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
+	}
+	
+	@Test
+	void testFindSlotByID_2 () {
+	    addSlot("addSlot|3");
+	    addItem("addItem|3|14-Oct-2020");
+	    String cmdLine5 = "listSlotByID|4";
+	    String [] cmdParts5 = cmdLine5.split("\\|");
+	    (new CmdListSlotByID()).execute(cmdParts5);
+	    String expectedResults1 = "Slot not found! Please check the ID again!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-1].trim());
+	}
+	
+	@Test
+	void testFindSlotByID_3 () {
+	    String cmdLine5 = "listSlotByID|1";
+	    String [] cmdParts5 = cmdLine5.split("\\|");
+	    (new CmdListSlotByID()).execute(cmdParts5);
+	    String expectedResults1 = "Warehouse is Empty!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-1].trim());
+	}
+	
+	@Test
+	void testFindSlotByID_4 () {
+	    String cmdLine5 = "listSlotByID|-1";
+	    String [] cmdParts5 = cmdLine5.split("\\|");
+	    (new CmdListSlotByID()).execute(cmdParts5);
+	    String expectedResults1 = "Wrong Input format! The input should be >0.";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-1].trim());
+	}
+	
+	@Test
+	void testFindSlotByID_5 () {
+	    String cmdLine5 = "listSlotByID|abc";
+	    String [] cmdParts5 = cmdLine5.split("\\|");
+	    (new CmdListSlotByID()).execute(cmdParts5);
+	    String expectedResults1 = "The ID input should be integer!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-1].trim());
+	}
+	
+	@Test
+	void testFindSlotByID_6 () {
+	    String cmdLine5 = "listSlotByID";
+	    String [] cmdParts5 = cmdLine5.split("\\|");
+	    (new CmdListSlotByID()).execute(cmdParts5);
+	    String expectedResults1 = "Insufficient command arguments!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-1].trim());
 	}
 	
 }

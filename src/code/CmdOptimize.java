@@ -8,7 +8,7 @@ public class CmdOptimize implements Command {
 	public void execute(String[] cmdParts) {
 		try {
 			if (wh.warehouseEmpty())
-				throw new ExWarehouseEmpty();
+				throw new ExWarehouseEmpty("Nothing to optimize!");
 			
 			wh.optimize();
 			System.out.println("Manually Optimized!");

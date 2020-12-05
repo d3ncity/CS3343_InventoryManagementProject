@@ -57,8 +57,10 @@ public class Warehouse implements Functions{
 	public void warehouseReset() {
 		this.totalNoOfItems = 0;
 		this.totalNoOfSlots = 0;
-		slots.clear();
+		this.slots.clear();
 		this.automation = true;
+		this.queueList.clear();
+		SystemDate.resetTheInstance();
 	}
 	
 	/*
@@ -68,10 +70,10 @@ public class Warehouse implements Functions{
 	 * 3. getTotalNoOfSlots
 	 * 4. assignSlotID
 	 */
-	public int getTotalNoOfItems() {return totalNoOfItems;}
+//	public int getTotalNoOfItems() {return totalNoOfItems;}
 	public int assignItemID() {return ++totalNoOfItems;}
 	
-	public int getTotalNoOfSlots() {return totalNoOfSlots;}
+//	public int getTotalNoOfSlots() {return totalNoOfSlots;}
 	public int assignSlotID() {return ++totalNoOfSlots;}
 	
 	/*
@@ -132,14 +134,7 @@ public class Warehouse implements Functions{
 			}
 			System.out.println("]");
 		}
-		System.out.print("Items Queue: [");
-		for (int i = 0; i < this.queueList.size(); i++) {
-			System.out.print("Item #"+this.queueList.get(i).getItemID()+"(Size:" + this.queueList.get(i).getDimensions()+")");
-			if (i != this.queueList.size() - 1) {
-				System.out.print(", ");
-			}
-		}
-		System.out.println("]");
+		this.printQueue();
 	}
 
 	/*
@@ -175,24 +170,24 @@ public class Warehouse implements Functions{
 	
 	
 	public void moveToSlot(Item item) {
-		//For testing purposes
-		added = false;
-		
+//		//For testing purposes
+//		added = false;
+//		
 		//Get an available slot
 		Slot s = this.searchSlotForItem(item);
 		if(s != null) {
 			s.addItem(item);
 			item.setCurrentSlot(s);	
             
-			//For testing purposes
-			added = true;
+//			//For testing purposes
+//			added = true;
 		}
 		else {
 			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
 			queueList.add(item);
 			Collections.sort(queueList, new SortQueue());
-			//For testing purposes
-			added = false;
+//			//For testing purposes
+//			added = false;
 		}
 		
 		if(warehouseHalfFull() && automation) {
@@ -210,18 +205,19 @@ public class Warehouse implements Functions{
 	}
 	
 	public void printQueue() {
-		System.out.print("[");
-		for(Item i: queueList) {
-			System.out.print(i.getDimensions());
-				if (i != queueList.get(queueList.size() - 1))
-					System.out.print(", ");
+		System.out.print("Items Queue: [");
+		for (int i = 0; i < this.queueList.size(); i++) {
+			System.out.print("Item #"+this.queueList.get(i).getItemID()+"(Size:" + this.queueList.get(i).getDimensions()+")");
+			if (i != this.queueList.size() - 1) {
+				System.out.print(", ");
+			}
 		}
 		System.out.println("]");
 	}
 	
-	//For test cases purposes
-	private boolean added = true;
-	public boolean testResult() {return added;}
+//	//For test cases purposes
+//	private boolean added = true;
+//	public boolean testResult() {return added;}
 	
 	//Optimize Algorithm
 	//Algorithm Step 1: Allocate the items to buffer

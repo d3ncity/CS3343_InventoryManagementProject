@@ -25,7 +25,6 @@ public class TestCmdListWarehouse {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
-		SystemDate.createTheInstance("13-Oct-2020");
 	}
 
 	@AfterAll
@@ -36,6 +35,7 @@ public class TestCmdListWarehouse {
 	@BeforeEach
 	void setUp() throws Exception {
 		Warehouse.getInstance().warehouseReset();
+		SystemDate.createTheInstance("13-Oct-2020");
 		System.setOut(new PrintStream(outContent));
 	}
 	

@@ -13,8 +13,7 @@ public class Main {
 		
 		//Program Start
 		logger.info("Warehouse Management System Program START....");
-
-		//Execute the main warehouse framework
+		
 		(new WarehouseSystem()).execute();
 		
 		//Program End

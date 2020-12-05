@@ -21,7 +21,6 @@ class TestOptimizeAlgo {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		Warehouse.getInstance().setAutomationStatus(false);
-		SystemDate.createTheInstance("13-Oct-2020");
 	}
 
 	@AfterAll
@@ -32,6 +31,7 @@ class TestOptimizeAlgo {
 	@BeforeEach
 	void setUp() throws Exception {
 		Warehouse.getInstance().warehouseReset();
+		SystemDate.createTheInstance("13-Oct-2020");
 		System.setOut(new PrintStream(outContent));
 	}
 

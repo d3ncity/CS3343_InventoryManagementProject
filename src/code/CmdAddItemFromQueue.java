@@ -2,7 +2,7 @@ package code;
 
 public class CmdAddItemFromQueue implements Command{
 	
-	private int itr = CmdDeliverExpiredItem.getDeliveredNum();
+	private int itr = CmdDeliverExpiredItem.getFreeOutVolume();
 	
 	@Override
 	public void execute(String[] cmdParts) {
