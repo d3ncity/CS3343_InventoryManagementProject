@@ -2,10 +2,6 @@ package code;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.LinkedList;
-//import java.util.List;
-//import java.util.Collections;
-//import java.util.Queue;
 
 public class Warehouse implements Functions{
 	
@@ -65,15 +61,10 @@ public class Warehouse implements Functions{
 	
 	/*
 	 * Methods for ID
-	 * 1. getTotalNoOfItems
-	 * 2. assignItemID
-	 * 3. getTotalNoOfSlots
-	 * 4. assignSlotID
+	 * 1. assignItemID
+	 * 2. assignSlotID
 	 */
-//	public int getTotalNoOfItems() {return totalNoOfItems;}
 	public int assignItemID() {return ++totalNoOfItems;}
-	
-//	public int getTotalNoOfSlots() {return totalNoOfSlots;}
 	public int assignSlotID() {return ++totalNoOfSlots;}
 	
 	/*
@@ -170,29 +161,19 @@ public class Warehouse implements Functions{
 	
 	
 	public void moveToSlot(Item item) {
-//		//For testing purposes
-//		added = false;
-//		
 		//Get an available slot
 		Slot s = this.searchSlotForItem(item);
 		if(s != null) {
 			s.addItem(item);
 			item.setCurrentSlot(s);	
-            
-//			//For testing purposes
-//			added = true;
 		}
 		else {
 			System.out.println("Sorry. Currently there is no available slots. The item is added to Queue.");
 			queueList.add(item);
 			Collections.sort(queueList, new SortQueue());
-//			//For testing purposes
-//			added = false;
 		}
-		
-		if(warehouseHalfFull() && automation) {
+		if(warehouseHalfFull() && automation)
 			optimize();
-		}
 	}
 	
 	//Moving item from the queue to the slot
@@ -214,11 +195,7 @@ public class Warehouse implements Functions{
 		}
 		System.out.println("]");
 	}
-	
-//	//For test cases purposes
-//	private boolean added = true;
-//	public boolean testResult() {return added;}
-	
+		
 	//Optimize Algorithm
 	//Algorithm Step 1: Allocate the items to buffer
 	private ArrayList<Item> itemsBuffer  = new ArrayList<>();	

@@ -106,6 +106,9 @@ class TestAddItem {
 	    String msg = "Checking when the departure date equals to system date";
 		String expectedResults1 = "Error. The date is before or equals to system date.";
 		String[] output = outContent.toString().split("\n");
+		for (int i = 0; i < output.length; i++) {
+			stdOut.println(output[i]);
+		}
 		assertEquals(expectedResults1, output[output.length - 1].trim());
 	}
 	
@@ -247,6 +250,21 @@ class TestAddItem {
 		RecordedCommand.clearUndoList();
 	    RecordedCommand.undoOneCommand();
 	    String expectedResults1 = "Nothing to undo.";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length - 1].trim());
+	}
+	
+	@Test
+	void testCmdAddItem_19() {
+	    startNewDay("startNewDay|25-Dec-2020");
+	    addItem("addItem|4|26-Dec-2020");
+	    InputCommand input = new InputCommand();
+	    String[] cmdParts1 = {"undo"};
+	    input.acceptCmd(cmdParts1);
+	    startNewDay("startNewDay|27-Dec-2020");
+	    String[] cmdParts2 = {"redo"};
+	    input.acceptCmd(cmdParts2);
+	    String expectedResults1 = "Cannot redo. The previous item date is before or equals to system date.";
 		String[] output = outContent.toString().split("\n");
 		assertEquals(expectedResults1, output[output.length - 1].trim());
 	}

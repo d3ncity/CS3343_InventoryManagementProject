@@ -291,7 +291,10 @@ public class TestSystemInput {
 	    System.setIn(original);
 	    String expectedResults1 = "System Input TERMINATED!";
 		String[] output = outContent.toString().split("\n");
-		assertEquals(expectedResults1, output[output.length-1].trim());
+		for (int i = 0; i < output.length; i++) {
+			stdOut.println(output[i]);
+		}
+		assertEquals(true, output[output.length-1].trim().contains(expectedResults1));
 	}
 	
 	@Test

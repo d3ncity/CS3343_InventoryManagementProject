@@ -85,6 +85,22 @@ public class TestFileSystem {
 	@Test 
 	public void testFile4() {
 	    final InputStream original = System.in;
+	    String input = "testTXT/Test4.txt" ;
+	    InputStream in = new ByteArrayInputStream(input.getBytes());
+	    System.setIn(in);
+	    Scanner scanner = new Scanner (System.in);
+	    (new FileInputCmd()).execute(scanner);
+	    System.setIn(original);
+	    String expectedResults1 = "The file is empty!";
+	    String expectedResults2 = "File Input TERMINATED!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults1, output[output.length-2].trim());
+		assertEquals(expectedResults2, output[output.length-1].trim());
+	}
+	
+	@Test 
+	public void testFile5() {
+	    final InputStream original = System.in;
 	    String input = "testTXT/NoSuchFile.txt" ;
 	    InputStream in = new ByteArrayInputStream(input.getBytes());
 	    System.setIn(in);
@@ -97,4 +113,5 @@ public class TestFileSystem {
 		assertEquals(expectedResults1, output[output.length-2].trim());
 		assertEquals(expectedResults2, output[output.length-1].trim());
 	}
+
 }

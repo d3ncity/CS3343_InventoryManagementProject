@@ -2,6 +2,7 @@ package code;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
@@ -60,6 +61,8 @@ public class FileInputCmd extends InputCommand {
 			fileFound = false;
 		} catch (ExSystemDateIsNotSet e) {
 			System.out.println(e.getMessage());
+		} catch (NoSuchElementException e) {
+			System.out.println("The file is empty!");
 		} finally {
 			if (inFile != null)
 				inFile.close();

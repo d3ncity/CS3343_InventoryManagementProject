@@ -147,4 +147,20 @@ public class TestWarehouseSystem {
 		String[] output = outContent.toString().split("\n");
 		assertEquals(expectedResults1, output[output.length-1].trim());
 	}
+	@Test
+	public void testMain7() throws IOException, NumberFormatException, InterruptedException {
+			
+		WarehouseSystem ws = new WarehouseSystem();
+	    final InputStream original = System.in;
+	    
+	    String input = "abcd -1" ;
+	    InputStream in = new ByteArrayInputStream(input.getBytes());
+	    System.setIn(in);
+	    
+		ws.execute();
+	    System.setIn(original);
+	    String expectedResults2 ="Warehouse System Terminated!";
+		String[] output = outContent.toString().split("\n");
+		assertEquals(expectedResults2, output[output.length-1].trim());
+	}
 }

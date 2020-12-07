@@ -3,6 +3,7 @@ package code;
 import java.util.*;
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("unused")
 public class WarehouseSystem {
 
 	// Log4J - Program Log Declaration
@@ -30,7 +31,6 @@ public class WarehouseSystem {
 
 		// local variable for input method selection
 		int functionInput = 0;
-		String filePath = null;
 
 		// Accept User Input
 		Scanner command = new Scanner(System.in);
@@ -38,26 +38,33 @@ public class WarehouseSystem {
 
 		do { // This flow will repeat until user choose to terminate
 
-			printInstructions();
+			try {
+				printInstructions();
 
-			functionInput = command.nextInt();
+				functionInput = command.nextInt();
 
-			System.out.print("---------------------------------------\n");
+				System.out.print("---------------------------------------\n");
 
-			// Switch to different input methods
-			switch (functionInput) {
-			case 1:
-				systemInput(input);
-				break;
-			case 2:
-				fileInput(input);
-				break;
-			case -1:
-				break;
-			default:
-				System.out.println("Wrong Command Input! Please retype!");
-				break;
+				// Switch to different input methods
+				switch (functionInput) {
+				case 1:
+					systemInput(input);
+					break;
+				case 2:
+					fileInput(input);
+					break;
+				case -1:
+					break;
+				default:
+					System.out.println("Wrong Command Input! Please retype!");
+					break;
+				}
+			} catch (InputMismatchException e) {
+				String badInput = command.next();
+	            System.out.println("Wrong Command Input! Please retype!");
+	            continue;
 			}
+			
 
 		} while (functionInput != -1);
 		input.close();

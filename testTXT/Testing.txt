@@ -1,10 +1,1 @@
 startNewDay|13-Oct-2020
-changeStatus
-addSlot|5
-addSlot|5
-addItem|2|14-Oct-2020
-addItem|1|14-Oct-2020
-addItem|3|14-Oct-2020
-visualize
-optimize
-visualize
