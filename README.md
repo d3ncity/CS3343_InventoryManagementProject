@@ -8,7 +8,7 @@
 
 ### For Users:
 ### Installation
-- The Warehouse Management System is available for both Windows OS and Mac OS.
+- The Warehouse Management System is available for both Windows OS and other operating systems.
 - If the system is running Windows OS, download and run the Windows exe file WMS4W.exe
 - If the system is running other operating system, download the jar file convert to a suitable file type.
 
