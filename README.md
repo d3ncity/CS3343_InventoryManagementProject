@@ -10,7 +10,7 @@
 ### Installation
 - The Warehouse Management System is available for both Windows OS and Mac OS.
 - If the system is running Windows OS, download and run the Windows exe file WMS4W.exe
-- If the system is running Mac OS, download and run the Mac dmg file WMS4M.dmg
+- If the system is running Mac OS, download and run the Mac dmg file WMS4M.app
 
 ### For Developers:
 ### Please note that in addition to the JRE System Library, the following JAR files / Libraries were used:
